@@ -29,7 +29,7 @@ class MovieSearch extends StatelessWidget {
                 icon: Icon(Icons.search),
                 onPressed: () {
                   if (_textController.text.length != 0) {
-                    SearchBloc()..dispatch(SearchPressed(_textController.text));
+                  BlocProvider.of<SearchBloc>(context).dispatch(SearchPressed(_textController.text));
                   }
                 },
               )
