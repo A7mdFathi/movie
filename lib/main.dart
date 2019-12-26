@@ -19,12 +19,12 @@ class App extends StatelessWidget {
       darkTheme: ThemeData(primarySwatch: Colors.purple),
       home: MultiBlocProvider(providers: [
         BlocProvider<MoviesBloc>(
-          builder: (context) => MoviesBloc()..dispatch(FetchMovies()),
+          create: (context) => MoviesBloc()..add(FetchMovies()),
         ),
         BlocProvider<TabBloc>(
-          builder: (context) => TabBloc()..dispatch(UpdateTab(AppTab.main)),
+          create: (context) => TabBloc()..add(UpdateTab(AppTab.main)),
         ),
-        BlocProvider<SearchBloc>(builder: (context) => SearchBloc()),
+        BlocProvider<SearchBloc>(create: (context) => SearchBloc()),
       ], child: HomePage()),
     );
   }

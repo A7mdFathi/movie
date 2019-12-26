@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/ui/screens.dart';
 
-
 class OneList extends StatelessWidget {
   final movies;
   final imgUrl = 'https://image.tmdb.org/t/p/w500';
@@ -20,7 +19,7 @@ class OneList extends StatelessWidget {
         SizedBox.fromSize(
           size: Size.fromHeight(300.0),
           child: ListView.builder(
-            padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 10.0),
               scrollDirection: Axis.horizontal,
               itemCount: movies.length,
               itemBuilder: (BuildContext context, int index) {
@@ -28,14 +27,14 @@ class OneList extends StatelessWidget {
                 return InkWell(
                     borderRadius: BorderRadius.circular(10.0),
                     onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return BlocProvider.value(
-                          value: MoviesBloc(),
-                          child: MovieDetail(movie),
-                        );
-                      }),
-                    ),
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return BlocProvider.value(
+                              value: MoviesBloc(),
+                              child: MovieDetail(movie),
+                            );
+                          }),
+                        ),
                     splashColor: Colors.purpleAccent.withOpacity(0.3),
                     highlightColor: Colors.purpleAccent.withOpacity(0.3),
                     child: Container(

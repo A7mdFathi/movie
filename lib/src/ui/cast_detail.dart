@@ -21,6 +21,7 @@ class CastDetails extends StatelessWidget {
               ),
         BackdropFilter(
           filter: ui.ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+          child: Container(color:Colors.black.withOpacity(0.4),),
         ),
       ],
     );

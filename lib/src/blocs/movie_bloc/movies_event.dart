@@ -12,14 +12,12 @@ class FetchMovies extends MoviesEvent {
   List<Object> get props => [];
 }
 
-
-class FetchMoreData extends MoviesEvent{
+class FetchMoreData extends MoviesEvent {
   int movieId;
+
   FetchMoreData(this.movieId);
 
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => [movieId];
 }
-
-

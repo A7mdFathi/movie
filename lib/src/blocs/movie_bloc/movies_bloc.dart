@@ -1,5 +1,3 @@
-
-
 import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/providers/repositories.dart';
 

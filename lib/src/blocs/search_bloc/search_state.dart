@@ -21,11 +21,10 @@ class Found extends SearchState {
   List<Object> get props => [];
 }
 
-class Searching extends SearchState{
+class Searching extends SearchState {
   @override
   // TODO: implement props
   List<Object> get props => [];
-
 }
 
 class NotFound extends SearchState {

@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'image_model.g.dart';
 
 @JsonSerializable()
-class PhotoModel {
+class PhotoModel extends Equatable{
   int id;
   List<Backdrops> backdrops;
   List<Posters> posters;
@@ -12,6 +13,10 @@ class PhotoModel {
 
   factory PhotoModel.fromJson(Map<String, dynamic> json) =>
       _$PhotoModelFromJson(json);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }
 
 @JsonSerializable()

@@ -11,7 +11,6 @@ class Loading extends MoviesState {
   @override
   // TODO: implement props
   List<Object> get props => [];
-
 }
 
 class ErrorState extends MoviesState {
@@ -29,7 +28,7 @@ class MoviesLoaded extends MoviesState {
 
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => [movieThisWeek, popular, topRated];
 }
 
 class MoreDetails extends MoviesState {
@@ -41,7 +40,5 @@ class MoreDetails extends MoviesState {
 
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object> get props => [creditsModel, photoModel, trailerModel];
 }
-
-
