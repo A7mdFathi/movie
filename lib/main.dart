@@ -21,9 +21,6 @@ class App extends StatelessWidget {
         BlocProvider<MoviesBloc>(
           create: (context) => MoviesBloc()..add(FetchMovies()),
         ),
-        BlocProvider<TabBloc>(
-          create: (context) => TabBloc()..add(UpdateTab(AppTab.MAIN)),
-        ),
         BlocProvider<SearchBloc>(create: (context) => SearchBloc()),
       ], child: HomePage()),
     );

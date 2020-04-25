@@ -1,1 +1,0 @@
-enum AppTab {MAIN,SEARCH,ACCOUNT }

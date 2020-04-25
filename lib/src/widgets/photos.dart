@@ -48,17 +48,7 @@ class PhotoScroller extends StatelessWidget {
             ],
           );
         }
-        if (state is Loading) {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
         return Container(
-          height: 20.0,
-          width: 20.0,
-          color: Colors.white,
         );
       },
     );

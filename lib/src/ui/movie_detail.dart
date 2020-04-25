@@ -8,11 +8,10 @@ import '../widgets/widgets.dart';
 class MovieDetail extends StatelessWidget {
   final movie;
   final image_url = 'https://image.tmdb.org/t/p/w500/';
-  final FlutterYoutube _flutterYoutube = FlutterYoutube();
 
   MovieDetail(this.movie);
 
- final MoviesBloc _moviesBloc = MoviesBloc();
+  final MoviesBloc _moviesBloc = MoviesBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +25,7 @@ class MovieDetail extends StatelessWidget {
               image_url + movie.poster_path,
             ),
             fit: BoxFit.cover,
-            fadeInCurve: Curves.easeInCubic,
-            fadeInDuration: Duration(milliseconds: 3000),
+            fadeInCurve: Curves.easeIn,
           ),
           BackdropFilter(
             filter: ui.ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
@@ -126,7 +124,7 @@ class MovieDetail extends StatelessWidget {
             child: GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Icon(
-                  Icons.arrow_back_ios,
+                  Icons.arrow_back,
                 )),
             left: 10.0,
             top: 20.0,

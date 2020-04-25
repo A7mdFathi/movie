@@ -60,13 +60,6 @@ class ActorScroller extends StatelessWidget {
             ],
           );
         }
-        if (state is Loading) {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
         return Container();
       },
     );
