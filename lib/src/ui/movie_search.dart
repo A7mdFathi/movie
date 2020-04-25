@@ -11,30 +11,32 @@ class MovieSearch extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(height: 25.0),
-           Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: TextFormField(
-                    controller: _textController,
-                    decoration: InputDecoration(
-                      labelText: 'Movie Name',
-                      hintText: 'Example : Avengers',
-                    ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: TextField(
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    labelText: 'Movie Name',
+                    hintText: 'Example : Avengers',
+                    labelStyle: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  if (_textController.text.length != 0) {
-                  BlocProvider.of<SearchBloc>(context).add(SearchPressed(_textController.text));
-                  }
-                },
-              )
-            ],
-          ),
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                if (_textController.text.length != 0) {
+                  BlocProvider.of<SearchBloc>(context)
+                      .add(SearchPressed(_textController.text));
+                }
+              },
+            )
+          ],
+        ),
         SizedBox(height: 25),
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
@@ -43,10 +45,17 @@ class MovieSearch extends StatelessWidget {
                 print('state found is trigerred');
                 return SearchList(movies: state.results.results);
               }
+              if (state is InitialSearchState) {
                 return Center(
-                  child: Text('${state.toString()}'),
+                  child: Text(
+                    'Enter Movie Name.',
+                    style: TextStyle(fontSize: 25.0),
+                  ),
                 );
-
+              }
+              return Center(
+                child: Text('${state.toString()}'),
+              );
             },
           ),
         ),

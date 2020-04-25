@@ -22,7 +22,7 @@ class App extends StatelessWidget {
           create: (context) => MoviesBloc()..add(FetchMovies()),
         ),
         BlocProvider<TabBloc>(
-          create: (context) => TabBloc()..add(UpdateTab(AppTab.main)),
+          create: (context) => TabBloc()..add(UpdateTab(AppTab.MAIN)),
         ),
         BlocProvider<SearchBloc>(create: (context) => SearchBloc()),
       ], child: HomePage()),

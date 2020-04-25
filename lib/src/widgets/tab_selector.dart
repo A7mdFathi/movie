@@ -21,10 +21,10 @@ class TabSelector extends StatelessWidget {
       items: AppTab.values.map((tab) {
         return BottomNavigationBarItem(
           icon: Icon(
-            tab == AppTab.main ? Icons.movie : Icons.search,
+            tab == AppTab.MAIN ? Icons.movie : Icons.search,
           ),
           title: Text(
-            tab == AppTab.main ? 'Movies' : 'Search',
+            tab == AppTab.MAIN ? 'Movies' : 'Search',
           ),
         );
       }).toList(),

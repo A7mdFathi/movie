@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 
 class TabBloc extends Bloc<TabEvent, AppTab> {
   @override
-  AppTab get initialState => AppTab.main;
+  AppTab get initialState => AppTab.MAIN;
 
   @override
   Stream<AppTab> mapEventToState(TabEvent event) async* {

@@ -12,13 +12,13 @@ class HomePage extends StatelessWidget {
       builder: (context, activeTab) {
         return Scaffold(
           backgroundColor: Color.fromRGBO(2, 20, 50, 1),
-          body: activeTab == AppTab.main ? MoviesSection() : MovieSearch(),
+          body: activeTab == AppTab.MAIN ? MoviesSection() : MovieSearch(),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) =>
                 BlocProvider.of<TabBloc>(context).add(UpdateTab(tab)),
           ),
-          drawer: DrawerMovie(),
+//          drawer: DrawerMovie(),
         );
       },
     );
