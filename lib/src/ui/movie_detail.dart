@@ -7,12 +7,12 @@ import '../widgets/widgets.dart';
 
 class MovieDetail extends StatelessWidget {
   final movie;
-  var image_url = 'https://image.tmdb.org/t/p/w500/';
+  final image_url = 'https://image.tmdb.org/t/p/w500/';
   final FlutterYoutube _flutterYoutube = FlutterYoutube();
 
   MovieDetail(this.movie);
 
-  MoviesBloc _moviesBloc = MoviesBloc();
+ final MoviesBloc _moviesBloc = MoviesBloc();
 
   @override
   Widget build(BuildContext context) {

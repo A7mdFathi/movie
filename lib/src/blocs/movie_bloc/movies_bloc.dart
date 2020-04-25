@@ -1,5 +1,5 @@
 import 'package:movies_now/src/models/models.dart';
-import 'package:movies_now/src/providers/repositories.dart';
+import 'package:movies_now/src/repositories/repositories.dart';
 
 import '../blocs.dart';
 import 'package:bloc/bloc.dart';
