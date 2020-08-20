@@ -14,7 +14,6 @@ class CreditsModel extends Equatable {
       _$CreditsModelFromJson(json);
 
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 

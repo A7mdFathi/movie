@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
+import '../blocs/movie_bloc/bloc.dart';
 import 'screens.dart';
 
 class SearchList extends StatelessWidget {
@@ -22,7 +23,7 @@ class SearchList extends StatelessWidget {
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
               return BlocProvider.value(
-                  value: MoviesBloc(), child: MovieDetail(movies[index]));
+                  value: MoviesBloc(Loading()), child: MovieDetail(movies[index]));
             })),
             splashColor: Colors.teal.withOpacity(0.3),
             child: Column(

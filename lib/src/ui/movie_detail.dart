@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'dart:ui' as ui;
+import '../blocs/blocs.dart';
 import '../widgets/widgets.dart';
 
 class MovieDetail extends StatelessWidget {
@@ -11,11 +12,15 @@ class MovieDetail extends StatelessWidget {
 
   MovieDetail(this.movie);
 
-  final MoviesBloc _moviesBloc = MoviesBloc();
+  final MoviesBloc _moviesBloc = MoviesBloc(Loading());
+
+  String videoURL = "https://www.youtube.com/watch?v=";
+
+  YoutubePlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
-    _moviesBloc.add(FetchMoreData(movie.id));
+    _moviesBloc.add(MovieDetails(movie.id));
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -37,33 +42,7 @@ class MovieDetail extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 16.0),
-                    width: double.infinity,
-                    height: 100.0,
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          'realese Date: ${movie.release_date}',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            shadows: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 5.0,
-                                  offset: Offset(0.0, 1.0))
-                            ],
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          movie.adult == true ? 'R-Rated' : '',
-                          style: TextStyle(fontSize: 18.0),
-                        ),
-                        Padding(padding: EdgeInsets.only(left: 8.0))
-                      ],
-                    ),
-                  ),
+
                   trailer(),
                   Container(
                     margin:
@@ -84,7 +63,7 @@ class MovieDetail extends StatelessWidget {
                                 ]),
                           ),
                         ),
-                        Column(
+                        Row(
                           children: <Widget>[
                             Icon(Icons.star,
                                 color: movie.vote_average > 7.0
@@ -97,6 +76,33 @@ class MovieDetail extends StatelessWidget {
                             ),
                           ],
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 16.0),
+                    width: double.infinity,
+                    height: 100.0,
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Release Date: ${movie.release_date}',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            shadows: [
+                              BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 5.0,
+                                  offset: Offset(0.0, 1.0))
+                            ],
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          movie.adult == true ? 'R-Rated' : '',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 8.0))
                       ],
                     ),
                   ),
@@ -136,36 +142,20 @@ class MovieDetail extends StatelessWidget {
 
   Widget trailer() {
     return BlocBuilder<MoviesBloc, MoviesState>(
-        bloc: _moviesBloc,
+        cubit: _moviesBloc,
         builder: (context, state) {
           if (state is MoreDetails) {
             String key = state.trailerModel.results[0].key;
-
+            _controller = YoutubePlayerController(
+              flags: YoutubePlayerFlags(autoPlay: false),
+                initialVideoId: YoutubePlayer.convertUrlToId(videoURL + key));
             return Column(
               children: <Widget>[
-                SizedBox(
-                    width: double.infinity,
-                    height: 200.0,
-                    child: IconButton(
-                        iconSize: 65.0,
-                        padding: EdgeInsets.all(5.0),
-                        splashColor: Colors.grey,
-                        color: Colors.white.withOpacity(0.7),
-                        icon: Icon(
-                          Icons.play_circle_filled,
-                        ),
-                        onPressed: () {
-                          FlutterYoutube.playYoutubeVideoByUrl(
-                            apiKey: key,
-                            videoUrl: 'https://www.youtube.com/watch?v=$key',
-                            autoPlay: true,
-                            fullScreen: true,
-                          );
-
-                          FlutterYoutube.onVideoEnded.listen((onData) {
-                            Navigator.pop(context);
-                          });
-                        })),
+                YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  width: double.infinity,
+                ),
               ],
             );
           }

@@ -7,14 +7,13 @@ import 'package:bloc/bloc.dart';
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final _repository = Repository();
 
-  @override
-  MoviesState get initialState => Loading();
+  MoviesBloc(MoviesState initialState) : super(Loading());
 
   @override
   Stream<MoviesState> mapEventToState(
     MoviesEvent event,
   ) async* {
-    if (event is FetchMovies) {
+    if (event is AllMovies) {
       yield Loading();
 
       MoviesModel popular = await _repository.fetchPopularMovies();
@@ -27,7 +26,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
       );
     }
 
-    if (event is FetchMoreData) {
+    if (event is MovieDetails) {
       yield Loading();
       final actors = await _repository.fetchActors(event.movieId);
       final images = await _repository.fetchImages(event.movieId);

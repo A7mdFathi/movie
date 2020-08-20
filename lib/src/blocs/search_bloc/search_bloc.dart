@@ -5,8 +5,7 @@ import '../blocs.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final Repository _repository = Repository();
 
-  @override
-  SearchState get initialState => InitialSearchState();
+  SearchBloc(SearchState initialState) : super(InitialSearchState());
 
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {

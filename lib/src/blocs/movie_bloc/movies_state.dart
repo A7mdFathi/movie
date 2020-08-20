@@ -9,13 +9,11 @@ abstract class MoviesState extends Equatable {
 
 class Loading extends MoviesState {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
 class ErrorState extends MoviesState {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
@@ -23,7 +21,6 @@ class MoviesLoaded extends MoviesState {
   final movieThisWeek;
   final MoviesModel popular;
   final MoviesModel topRated;
-
   MoviesLoaded({this.popular, this.topRated, this.movieThisWeek});
 
   @override

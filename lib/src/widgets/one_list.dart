@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/ui/screens.dart';
 
+import '../blocs/blocs.dart';
+
 class OneList extends StatelessWidget {
   final movies;
   final imgUrl = 'https://image.tmdb.org/t/p/w500';
@@ -30,7 +32,7 @@ class OneList extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) {
                             return BlocProvider.value(
-                              value: MoviesBloc(),
+                              value: MoviesBloc(Loading()),
                               child: MovieDetail(movie),
                             );
                           }),

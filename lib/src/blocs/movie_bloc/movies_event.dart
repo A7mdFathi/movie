@@ -6,18 +6,16 @@ abstract class MoviesEvent extends Equatable {
   MoviesEvent([List props = const []]) : super();
 }
 
-class FetchMovies extends MoviesEvent {
+class AllMovies extends MoviesEvent {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
-class FetchMoreData extends MoviesEvent {
+class MovieDetails extends MoviesEvent {
   int movieId;
 
-  FetchMoreData(this.movieId);
+  MovieDetails(this.movieId);
 
   @override
-  // TODO: implement props
   List<Object> get props => [movieId];
 }
