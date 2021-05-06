@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'image_model.g.dart';
 
 @JsonSerializable()
-class PhotoModel extends Equatable{
+class PhotoModel extends Equatable {
   int id;
   List<Backdrops> backdrops;
   List<Posters> posters;
@@ -28,7 +28,6 @@ class Backdrops {
   double vote_average;
   int vote_count;
   int width;
-
 
   Backdrops(this.aspect_ratio, this.file_path, this.height, this.iso_639_1,
       this.vote_average, this.vote_count, this.width);

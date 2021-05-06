@@ -37,6 +37,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: _TabPages,
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.white,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
@@ -53,7 +55,11 @@ class AcconutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      child: Center(child: Icon(Icons.account_circle,size: 65.0,)),
+      child: Center(
+          child: Icon(
+        Icons.account_circle,
+        size: 65.0,
+      )),
     ));
   }
 }

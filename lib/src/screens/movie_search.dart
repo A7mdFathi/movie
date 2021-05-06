@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/ui/screens.dart';
+import 'package:movies_now/src/screens/screens.dart';
 import '../blocs/blocs.dart';
 
 class MovieSearch extends StatelessWidget {
@@ -47,9 +47,15 @@ class MovieSearch extends StatelessWidget {
               }
               if (state is InitialSearchState) {
                 return Center(
-                  child: Text(
-                    'Enter Movie Name.',
-                    style: TextStyle(fontSize: 25.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.movie,
+                        size: 65.0,
+                        color: Colors.white,
+                      )
+                    ],
                   ),
                 );
               }

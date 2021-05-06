@@ -23,7 +23,10 @@ class SearchList extends StatelessWidget {
             onTap: () =>
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
               return BlocProvider.value(
-                  value: MoviesBloc(Loading()), child: MovieDetail(movies[index]));
+                  value: MoviesBloc(),
+                  child: MovieDetail(
+                    movie: movies[index],
+                  ));
             })),
             splashColor: Colors.teal.withOpacity(0.3),
             child: Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/ui/screens.dart';
+import 'package:movies_now/src/screens/screens.dart';
 
 import '../blocs/blocs.dart';
 
@@ -32,8 +32,8 @@ class OneList extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) {
                             return BlocProvider.value(
-                              value: MoviesBloc(Loading()),
-                              child: MovieDetail(movie),
+                              value: MoviesBloc(),
+                              child: MovieDetail(movie: movie),
                             );
                           }),
                         ),

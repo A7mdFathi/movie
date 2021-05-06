@@ -48,8 +48,7 @@ class PhotoScroller extends StatelessWidget {
             ],
           );
         }
-        return Container(
-        );
+        return Container();
       },
     );
   }

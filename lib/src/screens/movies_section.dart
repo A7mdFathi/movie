@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/widgets/widgets.dart';
 
-
 class MoviesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

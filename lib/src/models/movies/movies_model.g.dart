@@ -8,13 +8,14 @@ part of 'movies_model.dart';
 
 MoviesModel _$MoviesModelFromJson(Map<String, dynamic> json) {
   return MoviesModel(
-      json['page'] as int,
-      json['total_results'] as int,
-      json['total_pages'] as int,
-      (json['results'] as List)
-          ?.map((e) =>
-              e == null ? null : _Result.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+    json['page'] as int,
+    json['total_results'] as int,
+    json['total_pages'] as int,
+    (json['results'] as List)
+        ?.map((e) =>
+            e == null ? null : _Result.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
 }
 
 Map<String, dynamic> _$MoviesModelToJson(MoviesModel instance) =>
@@ -22,25 +23,26 @@ Map<String, dynamic> _$MoviesModelToJson(MoviesModel instance) =>
       'page': instance.page,
       'total_results': instance.total_results,
       'total_pages': instance.total_pages,
-      'results': instance.results
+      'results': instance.results,
     };
 
 _Result _$_ResultFromJson(Map<String, dynamic> json) {
   return _Result(
-      json['vote_count'] as int,
-      json['id'] as int,
-      json['video'] as bool,
-      json['vote_average'],
-      json['title'] as String,
-      (json['popularity'] as num)?.toDouble(),
-      json['poster_path'] as String,
-      json['original_language'] as String,
-      json['original_title'] as String,
-      (json['genre_ids'] as List)?.map((e) => e as int)?.toList(),
-      json['backdrop_path'] as String,
-      json['adult'] as bool,
-      json['overview'] as String,
-      json['release_date'] as String);
+    json['vote_count'] as int,
+    json['id'] as int,
+    json['video'] as bool,
+    json['vote_average'],
+    json['title'] as String,
+    (json['popularity'] as num)?.toDouble(),
+    json['poster_path'] as String,
+    json['original_language'] as String,
+    json['original_title'] as String,
+    (json['genre_ids'] as List)?.map((e) => e as int)?.toList(),
+    json['backdrop_path'] as String,
+    json['adult'] as bool,
+    json['overview'] as String,
+    json['release_date'] as String,
+  );
 }
 
 Map<String, dynamic> _$_ResultToJson(_Result instance) => <String, dynamic>{
@@ -57,5 +59,5 @@ Map<String, dynamic> _$_ResultToJson(_Result instance) => <String, dynamic>{
       'backdrop_path': instance.backdrop_path,
       'adult': instance.adult,
       'overview': instance.overview,
-      'release_date': instance.release_date
+      'release_date': instance.release_date,
     };

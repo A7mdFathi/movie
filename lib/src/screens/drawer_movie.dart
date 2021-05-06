@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class DrawerMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class DrawerMovie extends StatelessWidget {
             height: 200.0,
             padding: EdgeInsets.only(top: 35.0, left: 20.0),
             decoration: BoxDecoration(
-              color:  Color.fromRGBO(2, 20, 50, 1),
+              color: Color.fromRGBO(2, 20, 50, 1),
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Column(

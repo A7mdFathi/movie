@@ -63,11 +63,6 @@ class TopElement extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      '${movieThisWeek.vote_average}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
                     movieThisWeek.vote_average > 7
                         ? Icon(
                             Icons.star,
@@ -78,7 +73,12 @@ class TopElement extends StatelessWidget {
                             Icons.star_half,
                             color: Colors.amberAccent,
                             size: 20.0,
-                          )
+                          ),
+                    Text(
+                      '${movieThisWeek.vote_average}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
                   ],
                 ),
               )),

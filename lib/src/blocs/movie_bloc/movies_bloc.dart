@@ -7,7 +7,7 @@ import 'package:bloc/bloc.dart';
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final _repository = Repository();
 
-  MoviesBloc(MoviesState initialState) : super(Loading());
+  MoviesBloc() : super(Loading());
 
   @override
   Stream<MoviesState> mapEventToState(

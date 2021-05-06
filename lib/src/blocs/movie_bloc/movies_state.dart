@@ -21,6 +21,7 @@ class MoviesLoaded extends MoviesState {
   final movieThisWeek;
   final MoviesModel popular;
   final MoviesModel topRated;
+
   MoviesLoaded({this.popular, this.topRated, this.movieThisWeek});
 
   @override
