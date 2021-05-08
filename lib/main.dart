@@ -16,7 +16,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      darkTheme: ThemeData(primarySwatch: Colors.purple),
+      darkTheme: ThemeData(
+          primaryColor: Color(0xff0d253f),
+          accentColor: Color(0xff01b4e4),
+          dividerColor: Color(0xff90cea1)),
       home: MultiBlocProvider(providers: [
         BlocProvider<MoviesBloc>(
           create: (context) => MoviesBloc()..add(AllMovies()),

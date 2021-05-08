@@ -46,7 +46,8 @@ class MoviesSection extends StatelessWidget {
                       Padding(padding: EdgeInsets.only(left: 5.0)),
                       Expanded(
                           child: Divider(
-                        color: Colors.grey,
+                        height: 5.0,
+                        color: Theme.of(context).accentColor,
                       ))
                     ],
                   ),

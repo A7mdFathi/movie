@@ -37,8 +37,8 @@ class OneList extends StatelessWidget {
                             );
                           }),
                         ),
-                    splashColor: Colors.purpleAccent.withOpacity(0.3),
-                    highlightColor: Colors.purpleAccent.withOpacity(0.3),
+                    splashColor: Theme.of(context).accentColor,
+                    // highlightColor: Theme.of(context).accentColor,
                     child: Container(
                       width: 160.0,
                       margin: EdgeInsets.only(left: 3.0, right: 3.0),

@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     final _Pages = <Widget>[
       MoviesSection(),
       MovieSearch(),
-      AcconutSection(),
+      AccountSection(),
     ];
     final _TabPages = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
@@ -32,13 +32,13 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
     return Scaffold(
-      backgroundColor: Color.fromRGBO(2, 20, 50, 1),
+      // backgroundColor: Color.fromRGBO(2, 20, 50, 1),
       body: _Pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: _TabPages,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.white,
+        // selectedItemColor: Colors.amber,
+        // unselectedItemColor: Colors.white,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class AcconutSection extends StatelessWidget {
+class AccountSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
