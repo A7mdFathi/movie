@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
 
 import 'movie_item.dart';
 

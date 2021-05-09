@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import '../../data/models/models.dart';
 
 @immutable
@@ -26,7 +26,11 @@ class MoviesLoaded extends MoviesState {
   final MoviesModel popular;
   final MoviesModel topRated;
 
-  MoviesLoaded({this.popular, this.topRated, this.movieThisWeek});
+  MoviesLoaded({
+    @required this.popular,
+    @required this.topRated,
+    @required this.movieThisWeek,
+  });
 
   @override
   // TODO: implement props

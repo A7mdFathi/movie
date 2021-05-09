@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/data/api_urls.dart';
 import 'package:movies_now/src/ui/screens/screens.dart';
 
@@ -11,16 +13,26 @@ class MovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridTile(
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-              ApiUrls.imgUrl + movie.poster_path,
-              fit: BoxFit.cover,
+      child: InkWell(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) {
+            return BlocProvider.value(
+              value: MoviesBloc(),
+              child: MovieDetail(movie: movie),
+            );
+          }),
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                ApiUrls.imgUrl + movie.poster_path,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       footer: ClipRRect(
         borderRadius: BorderRadius.only(

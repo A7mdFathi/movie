@@ -5,4 +5,5 @@ class ApiUrls {
   static const String POPULAR = '$BASE_URL/movie/popular';
   static const String TOP_RATED = '$BASE_URL/movie/top_rated';
   static const String SEARCH_MOVIE = '$BASE_URL/search/movie';
+  static const String videoURL = "https://www.youtube.com/watch?v=";
 }

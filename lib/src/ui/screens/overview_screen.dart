@@ -22,9 +22,7 @@ class OverviewScreen extends StatelessWidget {
               children: [
                 TopElement(),
                 MoviesGrid(movies: state.popular.results),
-                const Divider(
-                  color: Colors.white,
-                ),
+                const Divider(color: Colors.white),
                 MoviesGrid(movies: state.topRated.results),
               ],
             );
@@ -45,25 +43,27 @@ class OverviewScreen extends StatelessWidget {
             );
           } else if (state is ErrorState &&
               state.exception is SocketException) {
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      Icons.network_check_outlined,
-                      size: 65.0,
-                    ),
-                    Text(
-                      'Network Error',
-                      style: TextStyle(fontSize: 35.0),
-                    ),
-                  ],
-                ),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Icon(
+                    Icons.network_check_outlined,
+                    size: 65.0,
+                  ),
+                  Text(
+                    'Network Error',
+                    style: TextStyle(fontSize: 35.0),
+                  ),
+                  FlatButton(
+                    splashColor: Theme.of(context).accentColor,
+                    onPressed: () =>
+                        BlocProvider.of<MoviesBloc>(context).add(AllMovies()),
+                    child: Text('Retry'),
+                  ),
+                ],
               ),
             );
           } else {

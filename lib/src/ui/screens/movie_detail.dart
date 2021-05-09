@@ -1,160 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
+import 'package:movies_now/src/data/api_urls.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'dart:ui' as ui;
 import '../../blocs/blocs.dart';
-import '../widgets/widgets.dart';
 
 class MovieDetail extends StatelessWidget {
   final movie;
+  static const routeName = '/movie-details';
 
-  MovieDetail({this.movie});
-
-  final image_url = 'https://image.tmdb.org/t/p/w500/';
-
-  MoviesBloc _moviesBloc = MoviesBloc();
-
-  final String videoURL = "https://www.youtube.com/watch?v=";
-
-  YoutubePlayerController _controller;
+  MovieDetail({@required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    _moviesBloc.add(MovieDetails(movie.id));
+    final _moviesBloc =
+        BlocProvider.of<MoviesBloc>(context).add(MovieDetails(movie.id));
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          // FadeInImage(
-          //   placeholder: AssetImage(''),
-          //   image: NetworkImage(
-          //     image_url + movie.poster_path,
-          //   ),
-          //   fit: BoxFit.cover,
-          //   fadeInCurve: Curves.easeIn,
-          // ),
-          // BackdropFilter(
-          //   filter: ui.ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-          //   child: Container(
-          //     color: Colors.black.withOpacity(0.6),
-          //   ),
-          // ),
-          ListView(
-            padding: EdgeInsets.all(8.0),
-            children: [
-              trailer(),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 0.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        movie.title,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30.0,
-                            shadows: [
-                              BoxShadow(
-                                  color: Colors.black, offset: Offset(0.0, 2.0))
-                            ]),
-                      ),
+      body: GridTile(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(ApiUrls.imgUrl + movie.poster_path),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(
+              sigmaX: 2,
+              sigmaY: 2,
+            ),
+            child: Container(
+              color: Colors.black26,
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Spacer(),
+                  Center(
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.play_circle_filled,
+                          size: 65.0,
+                          color: Colors.white60,
+                        ),
+                        onPressed: null),
+                  ),
+                  Spacer(),
+                  Text(
+                    '564566 Recommends',
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Icon(Icons.star,
-                            color: movie.vote_average > 7.0
-                                ? Colors.amber
-                                : Colors.amberAccent),
+                  ),
+                  Text(
+                    movie.title,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 35.0,
+                    ),
+                  ),
+                  Text(movie.overview),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Writers  '),
                         Text(
-                          '${movie.vote_average} / 10',
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
+                          'Writers',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  Spacer(),
+                ],
               ),
-              Container(
-                padding: EdgeInsets.only(top: 16.0),
-                width: double.infinity,
-                height: 100.0,
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      'Release Date: ${movie.release_date}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        shadows: [
-                          BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 5.0,
-                              offset: Offset(0.0, 1.0))
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      movie.adult == true ? 'R-Rated' : '',
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                    Padding(padding: EdgeInsets.only(left: 8.0))
-                  ],
-                ),
+            ),
+          ),
+        ),
+        header: Container(
+          color: Colors.black38,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios_rounded),
+                onPressed: null,
               ),
-              Text(movie.overview,
-                  style: new TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      shadows: [
-                        BoxShadow(color: Colors.black, offset: Offset(0.0, 1.0))
-                      ])),
-              SizedBox(height: 10.0),
-              BlocProvider.value(
-                value: _moviesBloc,
-                child: Column(
-                  children: <Widget>[
-                    ActorScroller(),
-                    PhotoScroller(),
-                  ],
-                ),
-              ),
+              Text('R'),
+              Text('2h15m'),
             ],
           ),
-          Positioned(
-            child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Icon(
-                  Icons.arrow_back,
-                )),
-            left: 10.0,
-            top: 20.0,
+        ),
+        footer: Container(
+          color: Colors.black38,
+          child: Row(
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: IconButton(icon: Icon(Icons.add), onPressed: null)),
+              Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      icon: Icon(Icons.star_rate_outlined), onPressed: null)),
+              Expanded(
+                  flex: 1,
+                  child: IconButton(icon: Icon(Icons.share), onPressed: null)),
+              Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      icon: Icon(Icons.download_rounded), onPressed: null)),
+            ],
           ),
-        ],
+        ),
       ),
     );
-  }
-
-  Widget trailer() {
-    return BlocBuilder<MoviesBloc, MoviesState>(
-        cubit: _moviesBloc,
-        builder: (context, state) {
-          if (state is MoreDetails) {
-            String key = state.trailerModel.results[0].key;
-            _controller = YoutubePlayerController(
-                flags: YoutubePlayerFlags(autoPlay: false),
-                initialVideoId: YoutubePlayer.convertUrlToId(videoURL + key));
-            return YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              width: double.infinity,
-            );
-          }
-
-          return Placeholder(
-            fallbackHeight: 300.0,
-            color: Colors.transparent,
-          );
-        });
   }
 }
