@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'dart:ui' as ui;
-import '../blocs/blocs.dart';
+import '../../blocs/blocs.dart';
 import '../widgets/widgets.dart';
 
 class MovieDetail extends StatelessWidget {

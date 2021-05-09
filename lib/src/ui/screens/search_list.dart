@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import '../blocs/movie_bloc/bloc.dart';
+import '../../blocs/movie_bloc/bloc.dart';
 import 'screens.dart';
 
 class SearchList extends StatelessWidget {

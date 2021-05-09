@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:movies_now/src/models/models.dart';
+import '../../data/models/models.dart';
 
 abstract class SearchState extends Equatable {
   SearchState([List props = const []]) : super();

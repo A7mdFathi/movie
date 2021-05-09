@@ -1,11 +1,14 @@
-import 'package:movies_now/src/models/models.dart';
-import 'package:movies_now/src/repositories/repositories.dart';
+import '../../data/models/models.dart';
+import '../../data/repositories/repositories.dart';
 
 import '../blocs.dart';
 import 'package:bloc/bloc.dart';
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final _repository = Repository();
+  MoviesModel popular;
+  MoviesModel top_rated;
+  var movieOfThisWeek;
 
   MoviesBloc() : super(Loading());
 
@@ -15,15 +18,18 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   ) async* {
     if (event is AllMovies) {
       yield Loading();
-
-      MoviesModel popular = await _repository.fetchPopularMovies();
-      MoviesModel topRated = await _repository.fetchTopRatedMovies();
-      final movieThisWeek = popular.results[0];
-      yield MoviesLoaded(
-        popular: popular,
-        topRated: topRated,
-        movieThisWeek: movieThisWeek,
-      );
+      try {
+        popular = await _repository.fetchPopularMovies();
+        top_rated = await _repository.fetchTopRatedMovies();
+        movieOfThisWeek = popular.results[0];
+        yield MoviesLoaded(
+          popular: popular,
+          topRated: top_rated,
+          movieThisWeek: movieOfThisWeek,
+        );
+      } catch (error) {
+        yield ErrorState(exception: error);
+      }
     }
 
     if (event is MovieDetails) {

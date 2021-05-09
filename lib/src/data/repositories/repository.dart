@@ -1,9 +1,11 @@
 import 'package:http/http.dart' show Client;
-import 'package:movies_now/src/models/models.dart';
+import '../../data/models/models.dart';
 import 'repositories.dart';
 
 class Repository {
-  final _moviesApiProvider = MovieApiProvider(client: Client());
+  final _moviesApiProvider = MovieClient(
+    client: Client(),
+  );
 
   Future<CreditsModel> fetchActors(int movieId) async => CreditsModel.fromJson(
       await _moviesApiProvider.fetchDetails(movieId, 'credits'));

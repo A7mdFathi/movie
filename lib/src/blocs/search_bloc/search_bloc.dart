@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:movies_now/src/repositories/repositories.dart';
+import '../../data/repositories/repositories.dart';
 import '../blocs.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {

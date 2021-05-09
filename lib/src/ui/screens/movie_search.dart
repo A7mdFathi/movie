@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/screens/screens.dart';
-import '../blocs/blocs.dart';
+import 'package:movies_now/src/ui/screens/screens.dart';
+import '../../blocs/blocs.dart';
 
 class MovieSearch extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();

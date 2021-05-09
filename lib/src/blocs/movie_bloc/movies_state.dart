@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movies_now/src/models/models.dart';
+import '../../data/models/models.dart';
 
 @immutable
 abstract class MoviesState extends Equatable {
@@ -13,8 +13,12 @@ class Loading extends MoviesState {
 }
 
 class ErrorState extends MoviesState {
+  final Exception exception;
+
+  ErrorState({@required this.exception});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [exception];
 }
 
 class MoviesLoaded extends MoviesState {

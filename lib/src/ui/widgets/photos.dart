@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/models/models.dart';
+import '../../data/models/models.dart';
 
 class PhotoScroller extends StatelessWidget {
   var image_url = 'https://image.tmdb.org/t/p/w500/';

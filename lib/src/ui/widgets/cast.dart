@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/movie_bloc/bloc.dart';
-import 'package:movies_now/src/models/models.dart';
+import 'package:movies_now/src/data/models/models.dart';
 
 import '../screens/cast_detail.dart';
 
