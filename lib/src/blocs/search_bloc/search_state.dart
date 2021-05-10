@@ -12,7 +12,7 @@ class InitialSearchState extends SearchState {
 }
 
 class Found extends SearchState {
-  final MoviesModel results;
+  final MoviesResponse results;
 
   Found({this.results});
 

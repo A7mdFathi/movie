@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/data/api_urls.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:movies_now/src/data/models/models.dart';
 import 'dart:ui' as ui;
-import '../../blocs/blocs.dart';
 
-class MovieDetail extends StatelessWidget {
-  final movie;
-  static const routeName = '/movie-details';
+class DetailsScreen extends StatelessWidget {
+  final MoviesModel movie;
 
-  MovieDetail({@required this.movie});
+  DetailsScreen({@required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    final _moviesBloc =
-        BlocProvider.of<MoviesBloc>(context).add(MovieDetails(movie.id));
     return Scaffold(
       body: GridTile(
         child: Container(
@@ -83,44 +77,91 @@ class MovieDetail extends StatelessWidget {
             ),
           ),
         ),
-        header: Container(
-          color: Colors.black38,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back_ios_rounded),
-                onPressed: null,
-              ),
-              Text('R'),
-              Text('2h15m'),
-            ],
+        header: GridTileBar(
+          backgroundColor: Colors.black38,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          trailing: Text('2h15m'),
+          subtitle: Text(
+            'R',
+            textAlign: TextAlign.center,
           ),
         ),
         footer: Container(
+          padding: EdgeInsets.only(
+            top: 8.0,
+            bottom: 8.0,
+          ),
           color: Colors.black38,
           child: Row(
             children: [
-              Expanded(
-                  flex: 1,
-                  child: IconButton(icon: Icon(Icons.add), onPressed: null)),
-              Expanded(
-                  flex: 1,
-                  child: IconButton(
-                      icon: Icon(Icons.star_rate_outlined), onPressed: null)),
-              Expanded(
-                  flex: 1,
-                  child: IconButton(icon: Icon(Icons.share), onPressed: null)),
-              Expanded(
-                  flex: 1,
-                  child: IconButton(
-                      icon: Icon(Icons.download_rounded), onPressed: null)),
+              _CustomIconButton(
+                icon: Icon(Icons.add),
+                onPress: null,
+                title: Text(
+                  'add',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              _CustomIconButton(
+                icon: Icon(Icons.download_outlined),
+                onPress: null,
+                title: Text(
+                  'download',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              _CustomIconButton(
+                icon: Icon(Icons.star_border_outlined),
+                onPress: null,
+                title: Text(
+                  'rate',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              _CustomIconButton(
+                icon: Icon(Icons.share),
+                onPress: null,
+                title: Text(
+                  'share',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _CustomIconButton extends StatelessWidget {
+  final Icon icon;
+  final Function onPress;
+  final Text title;
+
+  _CustomIconButton({
+    @required this.icon,
+    @required this.onPress,
+    @required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: FlatButton(
+          onPressed: onPress,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              icon,
+              title,
+            ],
+          )),
     );
   }
 }

@@ -4,15 +4,15 @@ import 'package:json_annotation/json_annotation.dart';
 part 'movies_model.g.dart';
 
 @JsonSerializable()
-class MoviesModel extends Equatable {
+class MoviesResponse extends Equatable {
   int page;
   int total_results;
   int total_pages;
-  List<_Result> results;
+  List<MoviesModel> movies;
 
-  MoviesModel(this.page, this.total_results, this.total_pages, this.results);
+  MoviesResponse(this.page, this.total_results, this.total_pages, this.movies);
 
-  factory MoviesModel.fromJson(Map<String, dynamic> json) =>
+  factory MoviesResponse.fromJson(Map<String, dynamic> json) =>
       _$MoviesModelFromJson(json);
 
   @override
@@ -20,7 +20,7 @@ class MoviesModel extends Equatable {
 }
 
 @JsonSerializable()
-class _Result {
+class MoviesModel {
   int vote_count;
   int id;
   bool video;
@@ -36,7 +36,7 @@ class _Result {
   String overview;
   String release_date;
 
-  _Result(
+  MoviesModel(
       this.vote_count,
       this.id,
       this.video,
@@ -52,6 +52,6 @@ class _Result {
       this.overview,
       this.release_date);
 
-  factory _Result.fromJson(Map<String, dynamic> json) =>
+  factory MoviesModel.fromJson(Map<String, dynamic> json) =>
       _$_ResultFromJson(json);
 }

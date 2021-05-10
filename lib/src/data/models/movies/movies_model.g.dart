@@ -6,28 +6,28 @@ part of 'movies_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MoviesModel _$MoviesModelFromJson(Map<String, dynamic> json) {
-  return MoviesModel(
+MoviesResponse _$MoviesModelFromJson(Map<String, dynamic> json) {
+  return MoviesResponse(
     json['page'] as int,
     json['total_results'] as int,
     json['total_pages'] as int,
     (json['results'] as List)
         ?.map((e) =>
-            e == null ? null : _Result.fromJson(e as Map<String, dynamic>))
+            e == null ? null : MoviesModel.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$MoviesModelToJson(MoviesModel instance) =>
+Map<String, dynamic> _$MoviesModelToJson(MoviesResponse instance) =>
     <String, dynamic>{
       'page': instance.page,
       'total_results': instance.total_results,
       'total_pages': instance.total_pages,
-      'results': instance.results,
+      'results': instance.movies,
     };
 
-_Result _$_ResultFromJson(Map<String, dynamic> json) {
-  return _Result(
+MoviesModel _$_ResultFromJson(Map<String, dynamic> json) {
+  return MoviesModel(
     json['vote_count'] as int,
     json['id'] as int,
     json['video'] as bool,
@@ -45,7 +45,7 @@ _Result _$_ResultFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_ResultToJson(_Result instance) => <String, dynamic>{
+Map<String, dynamic> _$_ResultToJson(MoviesModel instance) => <String, dynamic>{
       'vote_count': instance.vote_count,
       'id': instance.id,
       'video': instance.video,

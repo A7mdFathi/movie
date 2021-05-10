@@ -1,1 +1,0 @@
-enum MoviesType { POPULAR, TOP_RATED_NOW_PLAYING }

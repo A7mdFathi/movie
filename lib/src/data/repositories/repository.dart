@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' show Client;
 import '../../data/models/models.dart';
 import 'repositories.dart';
@@ -17,13 +18,13 @@ class Repository {
       TrailerModel.fromJson(
           await _moviesApiProvider.fetchDetails(movieId, 'videos'));
 
-  Future<MoviesModel> searchMovies(String query) =>
+  Future<MoviesResponse> searchMovies(String query) =>
       _moviesApiProvider.searchMovies(query);
 
-  Future<MoviesModel> fetchPopularMovies() =>
+  Future<MoviesResponse> fetchPopularMovies() =>
       _moviesApiProvider.fetchMovies('movie', 'popular');
 
-  Future<MoviesModel> fetchTopRatedMovies() =>
+  Future<MoviesResponse> fetchTopRatedMovies() =>
       _moviesApiProvider.fetchMovies('movie', 'top_rated');
 
 //  Future<MoviesModel> fetchNowPlaying() =>

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/ui/screens/screens.dart';
+import 'package:movies_now/src/data/repositories/repositories.dart';
+import 'package:movies_now/src/presentation/screens/screens.dart';
 import 'src/blocs/blocs.dart';
 import 'src/blocs/movie_bloc/bloc.dart';
-import 'src/ui/screens/home_screen.dart';
+import 'src/presentation/screens/home_screen.dart';
 
 void main() {
   // BlocSupervisor.delegate = SimpleBlocDelegate();
@@ -32,9 +33,6 @@ class App extends StatelessWidget {
         ],
         child: HomeScreen(),
       ),
-      routes: {
-        MovieDetail.routeName: (context) => MovieDetail(),
-      },
     );
   }
 }

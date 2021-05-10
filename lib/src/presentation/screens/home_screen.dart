@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/ui/widgets/app_drawer.dart';
+import 'package:movies_now/src/presentation/widgets/app_drawer.dart';
 import 'screens.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,30 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _pages = <Widget>[
-      OverviewScreen(),
-      MovieSearch(),
-      AccountSection(),
-      AccountSection(),
-    ];
-    final _tabPages = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.movie),
-        title: Text('Movies'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.search),
-        title: Text('Search'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.favorite_border),
-        title: Text('Favorite'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.account_circle_outlined),
-        title: Text('Account'),
-      ),
-    ];
+    final _pages = _pageItems();
+    final _tabPages = _navBarItems();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: _pages[_currentIndex],
@@ -62,7 +40,33 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class AccountSection extends StatelessWidget {
+List<Widget> _pageItems() => <Widget>[
+      OverviewPage(),
+      SearchPage(),
+      AccountPage(),
+      AccountPage(),
+    ];
+
+List<BottomNavigationBarItem> _navBarItems() => <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.movie),
+        title: Text('Movies'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.search),
+        title: Text('Search'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.favorite_border),
+        title: Text('Favorite'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle_outlined),
+        title: Text('Account'),
+      ),
+    ];
+
+class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

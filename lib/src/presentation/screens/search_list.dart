@@ -24,7 +24,7 @@ class SearchList extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
               return BlocProvider.value(
                   value: MoviesBloc(),
-                  child: MovieDetail(
+                  child: DetailsScreen(
                     movie: movies[index],
                   ));
             })),

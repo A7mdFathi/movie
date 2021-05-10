@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/data/api_urls.dart';
-import 'package:movies_now/src/ui/screens/screens.dart';
+import 'package:movies_now/src/presentation/screens/screens.dart';
 
 class MovieItem extends StatelessWidget {
   final movie;
@@ -18,7 +18,7 @@ class MovieItem extends StatelessWidget {
           MaterialPageRoute(builder: (context) {
             return BlocProvider.value(
               value: MoviesBloc(),
-              child: MovieDetail(movie: movie),
+              child: DetailsScreen(movie: movie),
             );
           }),
         ),

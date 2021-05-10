@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/ui/screens/screens.dart';
+import 'package:movies_now/src/presentation/screens/screens.dart';
 import '../../blocs/blocs.dart';
 
-class MovieSearch extends StatelessWidget {
+class SearchPage extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -43,7 +43,7 @@ class MovieSearch extends StatelessWidget {
             builder: (context, state) {
               if (state is Found) {
                 print('state found is trigerred');
-                return SearchList(movies: state.results.results);
+                return SearchList(movies: state.results.movies);
               }
               if (state is InitialSearchState) {
                 return Center(
