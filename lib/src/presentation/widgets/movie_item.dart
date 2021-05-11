@@ -17,7 +17,7 @@ class MovieItem extends StatelessWidget {
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (context) {
             return BlocProvider.value(
-              value: MoviesBloc(),
+              value: MovieBloc(),
               child: DetailsScreen(movie: movie),
             );
           }),

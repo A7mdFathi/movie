@@ -1,19 +1,16 @@
-import 'package:flutter/material.dart';
-
 import '../../data/models/models.dart';
 import '../../data/repositories/repositories.dart';
 
 import '../blocs.dart';
 import 'package:bloc/bloc.dart';
 
-class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
+class MovieBloc extends Bloc<MoviesEvent, MoviesState> {
   final Repository repository = Repository();
+  MovieModel movieOfThisWeek;
+  List<MovieModel> popularMovies;
+  List<MovieModel> topRatedMovies;
 
-  List<MoviesModel> popularMovies;
-  List<MoviesModel> topRatedMovies;
-  var movieOfThisWeek;
-
-  MoviesBloc() : super(Loading());
+  MovieBloc([List props = const []]) : super(Loading());
 
   @override
   Stream<MoviesState> mapEventToState(

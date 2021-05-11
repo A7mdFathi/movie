@@ -6,7 +6,7 @@ import 'package:movies_now/src/data/api_urls.dart';
 class TopElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final movieOfTheWeek = BlocProvider.of<MoviesBloc>(context).movieOfThisWeek;
+    final movieOfTheWeek = BlocProvider.of<MovieBloc>(context).movieOfThisWeek;
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3 + 70.0,
       child: GridTile(

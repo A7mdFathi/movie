@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies_now/src/data/api_urls.dart';
 import 'package:movies_now/src/data/models/models.dart';
+import 'package:movies_now/src/presentation/widgets/movie_data.dart';
 import 'dart:ui' as ui;
 
+import 'package:movies_now/src/presentation/widgets/widgets.dart';
+
 class DetailsScreen extends StatelessWidget {
-  final MoviesModel movie;
+  final MovieModel movie;
 
   DetailsScreen({@required this.movie});
 
@@ -12,70 +15,24 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridTile(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(ApiUrls.imgUrl + movie.poster_path),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: BackdropFilter(
-            filter: ui.ImageFilter.blur(
-              sigmaX: 2,
-              sigmaY: 2,
-            ),
-            child: Container(
-              color: Colors.black26,
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(),
-                  Center(
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.play_circle_filled,
-                          size: 65.0,
-                          color: Colors.white60,
-                        ),
-                        onPressed: null),
-                  ),
-                  Spacer(),
-                  Text(
-                    '564566 Recommends',
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  Text(
-                    movie.title,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 35.0,
-                    ),
-                  ),
-                  Text(movie.overview),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text('Writers  '),
-                        Text(
-                          'Writers',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                ],
+        child: Stack(
+          fit: StackFit.expand,
+          alignment: AlignmentDirectional.center,
+          children: <Widget>[
+            ImageFiltered(
+              imageFilter: ui.ImageFilter.blur(
+                sigmaX: 1.5,
+                sigmaY: 1.5,
+              ),
+              child: Image.network(
+                ApiUrls.imgUrl + movie.poster_path,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
+            MovieData(
+              movie: movie,
+            ),
+          ],
         ),
         header: GridTileBar(
           backgroundColor: Colors.black38,
@@ -97,7 +54,7 @@ class DetailsScreen extends StatelessWidget {
           color: Colors.black38,
           child: Row(
             children: [
-              _CustomIconButton(
+              CustomIconButton(
                 icon: Icon(Icons.add),
                 onPress: null,
                 title: Text(
@@ -105,7 +62,7 @@ class DetailsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 12),
                 ),
               ),
-              _CustomIconButton(
+              CustomIconButton(
                 icon: Icon(Icons.download_outlined),
                 onPress: null,
                 title: Text(
@@ -113,7 +70,7 @@ class DetailsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 12),
                 ),
               ),
-              _CustomIconButton(
+              CustomIconButton(
                 icon: Icon(Icons.star_border_outlined),
                 onPress: null,
                 title: Text(
@@ -121,7 +78,7 @@ class DetailsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 12),
                 ),
               ),
-              _CustomIconButton(
+              CustomIconButton(
                 icon: Icon(Icons.share),
                 onPress: null,
                 title: Text(
@@ -133,35 +90,6 @@ class DetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _CustomIconButton extends StatelessWidget {
-  final Icon icon;
-  final Function onPress;
-  final Text title;
-
-  _CustomIconButton({
-    @required this.icon,
-    @required this.onPress,
-    @required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: FlatButton(
-          onPressed: onPress,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              icon,
-              title,
-            ],
-          )),
     );
   }
 }

@@ -8,7 +8,7 @@ class MoviesResponse extends Equatable {
   int page;
   int total_results;
   int total_pages;
-  List<MoviesModel> movies;
+  List<MovieModel> movies;
 
   MoviesResponse(this.page, this.total_results, this.total_pages, this.movies);
 
@@ -20,7 +20,7 @@ class MoviesResponse extends Equatable {
 }
 
 @JsonSerializable()
-class MoviesModel {
+class MovieModel {
   int vote_count;
   int id;
   bool video;
@@ -36,7 +36,7 @@ class MoviesModel {
   String overview;
   String release_date;
 
-  MoviesModel(
+  MovieModel(
       this.vote_count,
       this.id,
       this.video,
@@ -52,6 +52,6 @@ class MoviesModel {
       this.overview,
       this.release_date);
 
-  factory MoviesModel.fromJson(Map<String, dynamic> json) =>
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$_ResultFromJson(json);
 }

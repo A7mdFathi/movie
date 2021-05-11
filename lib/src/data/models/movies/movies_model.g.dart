@@ -13,7 +13,7 @@ MoviesResponse _$MoviesModelFromJson(Map<String, dynamic> json) {
     json['total_pages'] as int,
     (json['results'] as List)
         ?.map((e) =>
-            e == null ? null : MoviesModel.fromJson(e as Map<String, dynamic>))
+            e == null ? null : MovieModel.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
@@ -26,8 +26,8 @@ Map<String, dynamic> _$MoviesModelToJson(MoviesResponse instance) =>
       'results': instance.movies,
     };
 
-MoviesModel _$_ResultFromJson(Map<String, dynamic> json) {
-  return MoviesModel(
+MovieModel _$_ResultFromJson(Map<String, dynamic> json) {
+  return MovieModel(
     json['vote_count'] as int,
     json['id'] as int,
     json['video'] as bool,
@@ -45,7 +45,7 @@ MoviesModel _$_ResultFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_ResultToJson(MoviesModel instance) => <String, dynamic>{
+Map<String, dynamic> _$_ResultToJson(MovieModel instance) => <String, dynamic>{
       'vote_count': instance.vote_count,
       'id': instance.id,
       'video': instance.video,

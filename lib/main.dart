@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/data/repositories/repositories.dart';
 import 'package:movies_now/src/presentation/screens/screens.dart';
 import 'src/blocs/blocs.dart';
 import 'src/blocs/movie_bloc/bloc.dart';
@@ -25,10 +24,12 @@ class App extends StatelessWidget {
       ),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider<MoviesBloc>(
-            create: (context) => MoviesBloc()..add(AllMovies()),
+          BlocProvider<MovieBloc>(
+            lazy: false,
+            create: (context) => MovieBloc()..add(AllMovies()),
           ),
           BlocProvider<SearchBloc>(
+              lazy: false,
               create: (context) => SearchBloc(InitialSearchState())),
         ],
         child: HomeScreen(),

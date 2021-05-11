@@ -11,9 +11,9 @@ class OverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        return BlocProvider.of<MoviesBloc>(context).add(AllMovies());
+        return BlocProvider.of<MovieBloc>(context).add(AllMovies());
       },
-      child: BlocBuilder<MoviesBloc, MoviesState>(
+      child: BlocBuilder<MovieBloc, MoviesState>(
         builder: (context, state) {
           if (state is MoviesLoaded) {
             return moviesDataWidget(state);
@@ -50,7 +50,7 @@ class OverviewPage extends StatelessWidget {
           FlatButton(
             splashColor: Theme.of(context).accentColor,
             onPressed: () =>
-                BlocProvider.of<MoviesBloc>(context).add(AllMovies()),
+                BlocProvider.of<MovieBloc>(context).add(AllMovies()),
             child: Text('Retry'),
           ),
         ],

@@ -23,8 +23,8 @@ class ErrorState extends MoviesState {
 
 class MoviesLoaded extends MoviesState {
   final movieThisWeek;
-  final List<MoviesModel> popularMovies;
-  final List<MoviesModel> topRatedMovies;
+  final List<MovieModel> popularMovies;
+  final List<MovieModel> topRatedMovies;
 
   MoviesLoaded({
     @required this.popularMovies,
@@ -45,6 +45,5 @@ class MoreDetails extends MoviesState {
   MoreDetails({this.creditsModel, this.photoModel, this.trailerModel});
 
   @override
-  // TODO: implement props
   List<Object> get props => [creditsModel, photoModel, trailerModel];
 }
