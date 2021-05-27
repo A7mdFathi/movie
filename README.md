@@ -11,4 +11,4 @@ Thanks to [Bozy Chi](https://dribbble.com/bozy)
 
 This project is a starting point for a Flutter application.
 
-to run this project add your api key from TMDB API
+Run this project add your api key from [TMDB API](https://developers.themoviedb.org/3)
