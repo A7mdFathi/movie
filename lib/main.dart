@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/repositories/repositories.dart';
+import 'package:movies_now/src/screens/screens.dart';
+import 'package:movies_now/src/utils/app_routes.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/presentation/screens/screens.dart';
 import 'src/blocs/blocs.dart';
-import 'src/blocs/movie_bloc/bloc.dart';
-import 'src/presentation/screens/home_screen.dart';
 
 void main() {
-  // BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(App());
+  final Repository repository = Repository();
+  Bloc.observer = SimpleBlocObserver();
+  runApp(
+    App(
+      appRoutes: AppRoutes(repository: repository),
+      repository: repository,
+    ),
+  );
 }
 
 class App extends StatelessWidget {
+  final Repository repository;
+  final AppRoutes appRoutes;
+
+  App({
+    @required this.appRoutes,
+    @required this.repository,
+  });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,16 +38,21 @@ class App extends StatelessWidget {
       ),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider<MovieBloc>(
-            lazy: false,
-            create: (context) => MovieBloc()..add(AllMovies()),
+          BlocProvider<MovieThisWeekCubit>(
+            create: (context) => MovieThisWeekCubit(repository: repository)
+              ..mapMovieWeekToState(),
           ),
-          BlocProvider<SearchBloc>(
-              lazy: false,
-              create: (context) => SearchBloc(InitialSearchState())),
+          BlocProvider<MoviesListCubit>(
+            create: (context) =>
+                MoviesListCubit(repository: repository)..loadMoviesList(),
+          ),
+          BlocProvider<MovieSearchBloc>(
+            create: (context) => MovieSearchBloc(),
+          )
         ],
         child: HomeScreen(),
       ),
+      onGenerateRoute: appRoutes.generateRoute,
     );
   }
 }
