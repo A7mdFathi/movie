@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/blocs/movie_credits_cubit/movie_credits_cubit.dart';
-import 'package:movies_now/src/blocs/movie_details_cubit/movie_details_cubit.dart';
+import 'package:movies_now/src/blocs/movies_peopleid_cubit/movies_by_personid_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 import 'package:movies_now/src/screens/screens.dart';
 
@@ -36,6 +35,24 @@ class AppRoutes {
                       ),
                     ],
                     child: DetailsScreen(),
+                  ));
+        }
+        return _errorRoute();
+      case '/movie-cast':
+        if (args is int) {
+          return MaterialPageRoute(
+              builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) =>
+                            PersonDetailsCubit(repository: _repository)
+                              ..mapPersonDetailsToState(args),
+                      ),
+                      BlocProvider(
+                          create: (context) => MoviesByPersonIdCubit()
+                            ..mapMoviesByPersonToState(args))
+                    ],
+                    child: MovieCastScreen(),
                   ));
         }
         return _errorRoute();

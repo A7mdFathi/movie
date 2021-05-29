@@ -15,7 +15,7 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: FlatButton(
+      child: TextButton(
           onPressed: onPress,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

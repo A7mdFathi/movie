@@ -1,4 +1,4 @@
-part of 'movies_by_person_id_cubit.dart';
+part of 'movies_by_personid_cubit.dart';
 
 abstract class MoviesByPersonIdState extends Equatable {
   const MoviesByPersonIdState();
@@ -10,7 +10,7 @@ class MoviesByPersonIdInitial extends MoviesByPersonIdState {
 }
 
 class MoviesByPersonSuccessState extends MoviesByPersonIdState{
-  final List<MovieModel> moviesByPerson;
+  final MoviesByPersonId moviesByPerson;
 
   MoviesByPersonSuccessState({@required this.moviesByPerson});
 

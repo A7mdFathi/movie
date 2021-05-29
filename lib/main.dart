@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 import 'package:movies_now/src/screens/screens.dart';
 import 'package:movies_now/src/utils/app_routes.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
 import 'src/blocs/blocs.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   final Repository repository = Repository();
-  Bloc.observer = SimpleBlocObserver();
+  // Bloc.observer = SimpleBlocObserver();
   runApp(
     App(
       appRoutes: AppRoutes(repository: repository),

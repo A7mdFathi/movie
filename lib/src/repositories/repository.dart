@@ -1,7 +1,7 @@
 import 'package:http/http.dart' show Client;
+import 'package:movies_now/src/api/movie_http_client.dart';
 import 'package:movies_now/src/models/credits/credit_model.dart';
 import 'package:movies_now/src/models/models.dart';
-import 'repositories.dart';
 
 class Repository {
   final Client client = Client();
@@ -29,6 +29,12 @@ class Repository {
 
   Future<CreditModel> fetchMovieCredits(int movieId) =>
       _movieHttpClient.getMovieCredits(movieId);
+
+  Future<PersonModel> fetchCastDetails(int castId)=>
+      _movieHttpClient.getCastDetails(castId);
+
+  Future<MoviesByPersonId> fetchMoviesByPerson(int personId)=>
+      _movieHttpClient.getMoviesByPersonId(personId);
 
 //  Future<MoviesModel> fetchNowPlaying() =>
 //      _moviesApiProvider.fetchMovies('movie', 'now_playing', true);

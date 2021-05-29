@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 
-part 'movies_by_person_id_state.dart';
+part 'movies_by_personid_state.dart';
 
 class MoviesByPersonIdCubit extends Cubit<MoviesByPersonIdState> {
   final Repository _repository = Repository();
@@ -12,10 +12,9 @@ class MoviesByPersonIdCubit extends Cubit<MoviesByPersonIdState> {
 
   void mapMoviesByPersonToState(int personId) async {
     try {
-      final MoviesResponse moviesByPersonId =
+      final MoviesByPersonId moviesByPersonId =
           await _repository.fetchMoviesByPerson(personId);
-      final movies = moviesByPersonId.movies;
-      emit(MoviesByPersonSuccessState(moviesByPerson: movies));
+      emit(MoviesByPersonSuccessState(moviesByPerson: moviesByPersonId));
     } catch (error) {
       throw Exception(error);
     }

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:movies_now/src/api/api_urls.dart';
 import 'package:movies_now/src/models/models.dart';
-import 'package:movies_now/src/repositories/api_urls.dart';
 
 class MovieItem extends StatelessWidget {
   final MovieModel movie;
@@ -21,16 +21,21 @@ class MovieItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: CachedNetworkImage(
-                fadeOutCurve: Curves.easeOut,
-                placeholder: (context, url) => Image.asset(
-                  'assets/movie_placeholder.jpg',
-                  fit: BoxFit.cover,
-                ),
-                fadeInCurve: Curves.easeIn,
-                imageUrl: ApiUrls.IMAGE_URL + movie.poster_path,
-                fit: BoxFit.cover,
-              ),
+              child: movie.poster_path == null
+                  ? Image.asset(
+                      'assets/movie_placeholder.jpg',
+                      fit: BoxFit.cover,
+                    )
+                  : CachedNetworkImage(
+                      fadeOutCurve: Curves.easeOut,
+                      placeholder: (context, url) => Image.asset(
+                        'assets/movie_placeholder.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                      fadeInCurve: Curves.easeIn,
+                      imageUrl: ApiUrls.IMAGE_URL + movie.poster_path,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ],
         ),

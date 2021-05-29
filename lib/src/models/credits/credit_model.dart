@@ -16,7 +16,7 @@ class CreditModel extends Equatable {
       _$CreditModelFromJson(json);
 
   @override
-  List<Object> get props => [id, cast];
+  List<Object> get props => [id, cast,crew];
 }
 
 @JsonSerializable(createToJson: false)

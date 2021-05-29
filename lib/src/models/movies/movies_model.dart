@@ -6,6 +6,7 @@ part 'movies_model.g.dart';
 @JsonSerializable(createToJson: false)
 class MoviesResponse extends Equatable {
   int page;
+  @JsonKey(name: 'results')
   List<MovieModel> movies;
 
   MoviesResponse(this.page, this.movies);

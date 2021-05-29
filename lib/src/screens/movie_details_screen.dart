@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/repositories/api_urls.dart';
-import 'dart:ui' as ui;
 
 import '../widgets/widgets.dart';
 
@@ -14,30 +11,9 @@ class DetailsScreen extends StatelessWidget {
       body: SafeArea(
         child: GridTile(
           child: Stack(
-            fit: StackFit.expand,
             alignment: AlignmentDirectional.center,
             children: <Widget>[
-              ImageFiltered(
-                imageFilter: ui.ImageFilter.blur(
-                  sigmaX: 1.5,
-                  sigmaY: 1.5,
-                ),
-                child: Builder(
-                  builder: (context) {
-                    final movieDetailsCubitState =
-                        context.watch<MovieDetailsCubit>().state;
-                    if (movieDetailsCubitState is MovieDetailSuccessState) {
-                      return CachedNetworkImage(
-                        fadeInCurve: Curves.bounceIn,
-                        imageUrl: ApiUrls.IMAGE_URL +
-                            movieDetailsCubitState.movieModel.poster_path,
-                        fit: BoxFit.cover,
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-              ),
+              MovieDetailsImageWidget(),
               MovieDetailsWidget(),
             ],
           ),
@@ -116,4 +92,6 @@ class DetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }

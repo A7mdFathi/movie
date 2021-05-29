@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/widgets/widgets.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
   @override
@@ -59,16 +58,26 @@ class MovieDetailsWidget extends StatelessWidget {
             builder: (context) {
               final state = context.watch<MovieCreditsCubit>().state;
               if (state is MovieCreditsLoadedState) {
-                return Column(
-                  children: [
-                    MovieCreditsWidget(
-                      creditsSubList: state.movieCast.sublist(0, 3),
-                    ),
-                    MovieCreditsWidget(
-                      creditsSubList: state.movieCrew.sublist(0, 2),
-                    ),
-                  ],
-                );
+                final movieCastSubList = state.movieCast.sublist(0, 3);
+                return Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: movieCastSubList.map((creditsSubList) {
+                      return GestureDetector(
+                        onTap: () => Navigator.of(context).pushNamed(
+                          '/movie-cast',
+                          arguments: creditsSubList.id,
+                        ),
+                        child: Text(
+                          '${creditsSubList.name}, ',
+                          style: TextStyle(
+                            fontSize: 15.0,
+
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      );
+                    }).toList());
               }
               return Column();
             },

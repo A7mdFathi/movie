@@ -3,8 +3,8 @@ import 'movie_item_widget.dart';
 
 class MoviesGrid extends StatelessWidget {
   final movies;
-
-  MoviesGrid({@required this.movies});
+  int fixedCount;
+  MoviesGrid({@required this.movies,  this.fixedCount});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MoviesGrid extends StatelessWidget {
       width: double.infinity,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: movies.length,
+        itemCount: fixedCount == null ? movies.length : fixedCount,
         itemBuilder: (context, index) => MovieItem(
           movie: movies[index],
         ),
