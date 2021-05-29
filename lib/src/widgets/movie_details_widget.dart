@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/movie_credits_cubit/movie_credits_cubit.dart';
-import 'package:movies_now/src/blocs/movie_details_cubit/movie_details_cubit.dart';
+import 'package:movies_now/src/blocs/blocs.dart';
+import 'package:movies_now/src/widgets/widgets.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
   @override
@@ -55,49 +55,23 @@ class MovieDetailsWidget extends StatelessWidget {
             }
             return Column();
           }),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Builder(
-              builder: (context) {
-                final state = context.watch<MovieCreditsCubit>().state;
-                if (state is MovieCreditsLoadedState) {
-                  final movieCastSublist = state.movieCast.sublist(0, 3);
-                  return Row(
-                      children: movieCastSublist.map((cast) {
-                    return Text(
-                      '${cast.name}, ',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        decoration: TextDecoration.underline,
-                      ),
-                    );
-                  }).toList());
-                }
-                return Row();
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Builder(
-              builder: (context) {
-                final state = context.watch<MovieCreditsCubit>().state;
-                if (state is MovieCreditsLoadedState) {
-                  final movieCastSublist = state.movieCrew.sublist(0, 2);
-                  return Row(
-                      children: movieCastSublist.map((crew) {
-                    return Text(
-                      '${crew.name}, ',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        decoration: TextDecoration.underline,
-                      ),
-                    );
-                  }).toList());
-                }
-                return Row();
-              },
-            ),
+          Builder(
+            builder: (context) {
+              final state = context.watch<MovieCreditsCubit>().state;
+              if (state is MovieCreditsLoadedState) {
+                return Column(
+                  children: [
+                    MovieCreditsWidget(
+                      creditsSubList: state.movieCast.sublist(0, 3),
+                    ),
+                    MovieCreditsWidget(
+                      creditsSubList: state.movieCrew.sublist(0, 2),
+                    ),
+                  ],
+                );
+              }
+              return Column();
+            },
           ),
           const Spacer(),
         ],
