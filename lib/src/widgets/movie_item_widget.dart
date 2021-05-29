@@ -33,7 +33,7 @@ class MovieItem extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       fadeInCurve: Curves.easeIn,
-                      imageUrl: ApiUrls.IMAGE_URL + movie.poster_path,
+                      imageUrl: ApiUrls.IMAGE_BASE_URL + movie.poster_path,
                       fit: BoxFit.cover,
                     ),
             ),

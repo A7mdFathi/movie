@@ -38,7 +38,7 @@ class MovieThisWeekWidget extends StatelessWidget {
                   'assets/movie_placeholder.jpg',
                   fit: BoxFit.cover,
                 ),
-                imageUrl: ApiUrls.IMAGE_URL + state.movie.backdrop_path,
+                imageUrl: ApiUrls.IMAGE_BASE_URL + state.movie.backdrop_path,
                 fit: BoxFit.cover,
               ),
             );
