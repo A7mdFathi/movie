@@ -25,9 +25,12 @@ class MovieHttpClient {
   }
 
   Future<MoviesResponse> fetchMoviesList(
-      String mediaType, String movieType) async {
-    final Uri moviesUrl = Uri.parse(
-        '${ApiUrls.BASE_URL}/$mediaType/$movieType?api_key=${ApiUrls.API_KEY}');
+       String movieType) async {
+    final moviesListString =
+        BaseApiUrls.MOVIES_LIST.replaceFirst('{movies_list}', movieType);
+
+    final Uri moviesUrl = Uri.parse(moviesListString);
+
     //another url
     //  Uri testmov= Uri.https('api.themoviedb.org', '/3/$mediaType/$movieType',{'api_key':ApiUrls.API_KEY,},);
 
@@ -41,23 +44,24 @@ class MovieHttpClient {
   }
 
   Future<MovieModel> fetchMovieDetails(int movieId) async {
-    final Uri movieDetailsURL = Uri.parse(
-        "${ApiUrls.BASE_URL}/movie/$movieId?api_key=${ApiUrls.API_KEY}");
-    final Response response = await _client.get(movieDetailsURL);
+    final movieDetailsString =
+        BaseApiUrls.MOVIE.replaceFirst('{movie_id}', '$movieId');
+    final Uri movieDetailsUrl = Uri.parse(movieDetailsString);
+    final Response response = await _client.get(movieDetailsUrl);
 
     if (response.statusCode != 200) {
       throw Exception('Failed to load details ${response.statusCode}');
     }
     final body = json.decode(response.body);
-    final MovieModel movieDetails = MovieModel.fromJson(body);
-    return movieDetails;
+    final MovieModel movieDetailsData = MovieModel.fromJson(body);
+    return movieDetailsData;
   }
 
   Future<MoviesResponse> searchMovies(String query) async {
-    print('${ApiUrls.SEARCH_MOVIE}/?api_key=${ApiUrls.API_KEY}&query=$query');
-    final Uri searchMovie = Uri.parse(
-        "${ApiUrls.SEARCH_MOVIE}/?api_key=${ApiUrls.API_KEY}&query=$query");
-    final Response response = await _retry.get(searchMovie);
+    final searchForMoviesString =
+        BaseApiUrls.SEARCH_MOVIE.replaceFirst('{query}', query);
+    final Uri searchMovieUrl = Uri.parse(searchForMoviesString);
+    final Response response = await _retry.get(searchMovieUrl);
 
     if (response.statusCode != 200) {
       throw Exception('failed to load');
@@ -67,8 +71,9 @@ class MovieHttpClient {
   }
 
   Future<CreditModel> getMovieCredits(int movieId) async {
-    final Uri movieCreditsUrl = Uri.parse(
-        "${ApiUrls.BASE_URL}/movie/$movieId/credits?api_key=${ApiUrls.API_KEY}");
+    final movieCreditsString =
+        BaseApiUrls.MOVIE_CREDITS.replaceFirst('{movie_id}', '$movieId');
+    final Uri movieCreditsUrl = Uri.parse(movieCreditsString);
 
     final Response response = await _retry.get(movieCreditsUrl);
 
@@ -80,8 +85,9 @@ class MovieHttpClient {
   }
 
   Future<PersonModel> getCastDetails(int castId) async {
-    final Uri castDetailsUrl = Uri.parse(
-        "${ApiUrls.BASE_URL}/person/$castId?api_key=${ApiUrls.API_KEY}");
+    final String castDetailsString =
+        BaseApiUrls.CAST_DETAILS.replaceFirst('{cast_id}', '$castId');
+    final Uri castDetailsUrl = Uri.parse(castDetailsString);
 
     final Response response = await _retry.get(castDetailsUrl);
 
@@ -92,17 +98,36 @@ class MovieHttpClient {
     return PersonModel.fromJson(body);
   }
 
- Future<MoviesByPersonId> getMoviesByPersonId(int personId) async {
-    final Uri moviesByPersonUrl = Uri.parse(
-        "${ApiUrls.BASE_URL}/person/$personId/movie_credits?api_key=${ApiUrls.API_KEY}");
+  Future<MoviesByPersonId> getMoviesByPersonId(int personId) async {
+    final moviesByPersonString = BaseApiUrls.MOVIES_BY_PERSON_ID
+        .replaceFirst('{person_id}', '$personId');
+    final Uri moviesByPersonUrl = Uri.parse(moviesByPersonString);
 
-    final Response response=await _retry.get(moviesByPersonUrl);
+    final Response response = await _retry.get(moviesByPersonUrl);
 
-    if(response.statusCode !=200){
+    if (response.statusCode != 200) {
       throw Exception('failed to load movies from person id');
     }
-    final body =json.decode(response.body);
+    final body = json.decode(response.body);
 
     return MoviesByPersonId.fromJson(body);
+  }
+
+  Future<MoviesResponse> getSimilarMovies(int movieId)async{
+    final similarityListString =
+    BaseApiUrls.MOVIES_SIMILAR.replaceFirst('{movie_id}', '$movieId');
+
+    final Uri moviesUrl = Uri.parse(similarityListString);
+
+    //another url
+    //  Uri testmov= Uri.https('api.themoviedb.org', '/3/$mediaType/$movieType',{'api_key':ApiUrls.API_KEY,},);
+
+    final Response response = await _retry.get(moviesUrl);
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+    final body = json.decode(response.body);
+    return MoviesResponse.fromJson(body);
   }
 }

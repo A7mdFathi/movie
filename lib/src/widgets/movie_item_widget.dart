@@ -18,6 +18,7 @@ class MovieItem extends StatelessWidget {
           arguments: movie.id,
         ),
         child: Column(
+mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
@@ -33,7 +34,7 @@ class MovieItem extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       fadeInCurve: Curves.easeIn,
-                      imageUrl: ApiUrls.IMAGE_BASE_URL + movie.poster_path,
+                      imageUrl: BaseApiUrls.IMAGE_BASE_URL + movie.poster_path,
                       fit: BoxFit.cover,
                     ),
             ),

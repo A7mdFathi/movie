@@ -28,6 +28,17 @@ MovieModel _$MovieModelFromJson(Map<String, dynamic> json) {
     json['backdrop_path'] as String,
     json['adult'] as bool,
     json['overview'] as String,
+    json['runtime'] as int,
     json['release_date'] as String,
+    images: json['images'] == null
+        ? null
+        : ImagesResponse.fromJson(json['images'] as Map<String, dynamic>),
+    trailers: json['videos'] == null
+        ? null
+        : TrailerResponse.fromJson(json['videos'] as Map<String, dynamic>),
+    movieGenre: (json['genres'] as List)
+        ?.map(
+            (e) => e == null ? null : Genre.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }

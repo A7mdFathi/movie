@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movies_now/src/models/genre/movie_genre.dart';
+import 'package:movies_now/src/models/models.dart';
 
 part 'movies_model.g.dart';
 
@@ -31,20 +33,31 @@ class MovieModel extends Equatable {
   String overview;
   String release_date;
   double popularity;
+  int runtime;
+
+  @JsonKey(name: 'images')
+  ImagesResponse images;
+  @JsonKey(name: 'videos')
+  TrailerResponse trailers;
+  @JsonKey(name: 'genres')
+  List<Genre> movieGenre;
 
   MovieModel(
-    this.vote_count,
-    this.id,
-    this.video,
-    this.vote_average,
-    this.title,
-    this.popularity,
-    this.poster_path,
-    this.backdrop_path,
-    this.adult,
-    this.overview,
-    this.release_date,
-  );
+      this.vote_count,
+      this.id,
+      this.video,
+      this.vote_average,
+      this.title,
+      this.popularity,
+      this.poster_path,
+      this.backdrop_path,
+      this.adult,
+      this.overview,
+      this.runtime,
+      this.release_date,
+      {this.images,
+      this.trailers,
+      this.movieGenre});
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);

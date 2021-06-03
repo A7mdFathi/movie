@@ -10,12 +10,7 @@ class MovieDetailsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ImageFiltered(
-      imageFilter: ui.ImageFilter.blur(
-        sigmaX: 1.5,
-        sigmaY: 1.5,
-      ),
-      child: Builder(
+    return  Builder(
         builder: (context) {
           final state = context.watch<MovieDetailsCubit>().state;
           if (state is MovieDetailSuccessState &&
@@ -24,13 +19,13 @@ class MovieDetailsImageWidget extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
               fadeInCurve: Curves.bounceIn,
-              imageUrl: ApiUrls.IMAGE_BASE_URL + state.movieModel.poster_path,
+              imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movieModel.poster_path,
               fit: BoxFit.cover,
             );
           }
           return Container();
         },
-      ),
-    );
+      );
+
   }
 }

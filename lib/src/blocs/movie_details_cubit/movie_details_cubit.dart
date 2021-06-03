@@ -8,12 +8,13 @@ part 'movie_details_state.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final Repository repository;
-
+int movieId;
   MovieDetailsCubit({@required this.repository})
       : assert(repository != null),
         super(MovieDetailsInitialState());
 
   void movieDetailsFetched(int id) async {
+    movieId=id;
     try {
       final _detailMovie = await repository.getMovie(id);
       emit(MovieDetailSuccessState(_detailMovie));

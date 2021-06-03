@@ -18,7 +18,7 @@ class DetailsScreen extends StatelessWidget {
             ],
           ),
           header: GridTileBar(
-            backgroundColor: Colors.black38,
+            backgroundColor: Colors.black,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () => Navigator.of(context).pop(),
@@ -27,7 +27,7 @@ class DetailsScreen extends StatelessWidget {
               final movieDetailsCubitState =
                   context.watch<MovieDetailsCubit>().state;
               if (movieDetailsCubitState is MovieDetailSuccessState) {
-                return Text('2h15m');
+                return Text('${movieDetailsCubitState.movieModel.runtime} min');
               }
               return Text('');
             }),
@@ -50,7 +50,7 @@ class DetailsScreen extends StatelessWidget {
               top: 8.0,
               bottom: 8.0,
             ),
-            color: Colors.black38,
+            color: Colors.black,
             child: Row(
               children: [
                 CustomIconButton(
@@ -63,7 +63,17 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 CustomIconButton(
                   icon: const Icon(Icons.download_outlined),
-                  onPress: null,
+                  onPress: () {
+                    final state = context.read<MovieDetailsCubit>().state;
+                    if (state is MovieDetailSuccessState) {
+                      Navigator.of(context).pushNamed(
+                        '/movie_trailer',
+                        arguments:
+                            state.movieModel.trailers.trailerModels[0].key ??
+                                null,
+                      );
+                    }
+                  },
                   title: Text(
                     'download',
                     style: TextStyle(fontSize: 12),
@@ -92,6 +102,4 @@ class DetailsScreen extends StatelessWidget {
       ),
     );
   }
-
-
 }

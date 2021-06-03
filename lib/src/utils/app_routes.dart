@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/blocs/movies_peopleid_cubit/movies_by_personid_cubit.dart';
+import 'package:movies_now/src/blocs/movies_similar_cubit/movies_similar_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
+import 'package:movies_now/src/screens/movie_trailer_screen.dart';
 import 'package:movies_now/src/screens/screens.dart';
 
 class AppRoutes {
@@ -33,6 +35,10 @@ class AppRoutes {
                             MovieCreditsCubit(repository: _repository)
                               ..mapMovieCreditsToState(args),
                       ),
+                      BlocProvider(
+                          create: (context) =>
+                              MoviesSimilarCubit(repository: _repository)
+                                ..loadMoviesList(args))
                     ],
                     child: DetailsScreen(),
                   ));
@@ -54,6 +60,11 @@ class AppRoutes {
                     ],
                     child: MovieCastScreen(),
                   ));
+        }
+        return _errorRoute();
+      case '/movie_trailer':
+        if (args is String) {
+          return MaterialPageRoute(builder: (_) => MovieTrailerScreen(trailerKey: args));
         }
         return _errorRoute();
       case '/search':

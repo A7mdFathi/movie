@@ -4,7 +4,8 @@ import 'movie_item_widget.dart';
 class MoviesGrid extends StatelessWidget {
   final movies;
   int fixedCount;
-  MoviesGrid({@required this.movies,  this.fixedCount});
+  bool isImages;
+  MoviesGrid({@required this.movies,  this.fixedCount,this.isImages});
 
   @override
   Widget build(BuildContext context) {

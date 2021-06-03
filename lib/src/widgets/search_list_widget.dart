@@ -44,7 +44,7 @@ class SearchList extends StatelessWidget {
                     : CachedNetworkImage(
                         height: 200.0,
                         width: 100.0,
-                        imageUrl: ApiUrls.IMAGE_BASE_URL +
+                        imageUrl: BaseApiUrls.IMAGE_BASE_URL +
                             state.movieModel[index].poster_path,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (context, url, progress) =>
