@@ -7,6 +7,8 @@ class OverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
+      color: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).splashColor,
       onRefresh: () async {
         context.read<MovieThisWeekCubit>().mapMovieWeekToState();
         context.read<MoviesListCubit>().loadMoviesList();

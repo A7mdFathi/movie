@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,9 +40,15 @@ class MovieDetailsWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).hoverColor,
                       ),
                     ),
-                    Text(state.movieModel.overview),
+                    Text(
+                      state.movieModel.overview,
+                      style: TextStyle(
+                        color: Theme.of(context).hoverColor,
+                      ),
+                    ),
                   ],
                 );
               }
@@ -51,7 +56,12 @@ class MovieDetailsWidget extends StatelessWidget {
             }),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Actors'),
+              child: Text(
+                'Actors',
+                style: TextStyle(
+                  color: Theme.of(context).hoverColor,
+                ),
+              ),
             ),
             Builder(
               builder: (context) {
@@ -72,6 +82,7 @@ class MovieDetailsWidget extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 15.0,
                               decoration: TextDecoration.underline,
+                              color: Theme.of(context).hoverColor,
                             ),
                           ),
                         );
@@ -88,7 +99,6 @@ class MovieDetailsWidget extends StatelessWidget {
                   final movieGenres = state.movieModel.movieGenre;
                   return Row(
                     mainAxisSize: MainAxisSize.min,
-
                     children: movieGenres.map((movieGenre) {
                       return Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -109,7 +119,10 @@ class MovieDetailsWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Similar Movies',
-                style: TextStyle(fontSize: 25.0),
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Theme.of(context).hoverColor,
+                ),
               ),
             ),
             SizedBox(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/blocs/app_internet_bloc/app_internet_bloc.dart';
 import 'package:movies_now/src/widgets/widgets.dart';
 import 'screens.dart';
 
@@ -15,25 +17,6 @@ class _HomeScreenState extends State<HomeScreen>
     // SearchPage(),
     AccountPage(),
     AccountPage(),
-  ];
-
-  static const _tabs = <Tab>[
-    Tab(
-      icon: Icon(Icons.movie),
-      text: 'Movies',
-    ),
-    // Tab(
-    //   icon: Icon(Icons.search),
-    //   text: 'Search',
-    // ),
-    Tab(
-      icon: Icon(Icons.favorite_border),
-      text: 'Favorite',
-    ),
-    Tab(
-      icon: Icon(Icons.account_circle_outlined),
-      text: 'Account',
-    ),
   ];
 
   @override
@@ -54,23 +37,63 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: TabBarView(
-        children: _tabPages,
-        controller: _tabController,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: BlocListener<AppInternetBloc, AppInternetState>(
+        listener: (context, state) {
+          if (state is AppDisconnectedState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Your app is Offline',
+                ),
+              ),
+            );
+          }
+        },
+        child: TabBarView(
+          children: _tabPages,
+          controller: _tabController,
+        ),
       ),
       bottomNavigationBar: Material(
-        borderRadius: BorderRadius.circular(8.0),
+        color: Theme.of(context).primaryColor,
         elevation: 2.0,
         type: MaterialType.card,
         child: TabBar(
-          tabs: _tabs,
+          indicatorColor: Theme.of(context).splashColor,
+          labelColor: Theme.of(context).splashColor,
+          unselectedLabelColor: Theme.of(context).hoverColor,
+          tabs: _appTaps(context),
           controller: _tabController,
         ),
       ),
       drawer: AppDrawer(),
     );
   }
+}
+
+List<Widget> _appTaps(BuildContext context) {
+  return <Tab>[
+    Tab(
+      icon: Icon(
+        Icons.movie,
+      ),
+      text: 'Movies',
+    ),
+    Tab(
+      icon: Icon(
+        Icons.favorite_border,
+      ),
+      text: 'Favorite',
+    ),
+    Tab(
+      icon: Icon(
+        Icons.account_circle_outlined,
+      ),
+      text: 'Account',
+    ),
+  ];
 }
 
 class AccountPage extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/blocs/app_internet_bloc/app_internet_bloc.dart';
+import 'package:movies_now/src/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 import 'package:movies_now/src/screens/screens.dart';
 import 'package:movies_now/src/utils/app_routes.dart';
@@ -28,31 +30,42 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      darkTheme: ThemeData(
-        primaryColor: Color(0xff0d253f),
-        accentColor: Color(0xff01b4e4),
-        dividerColor: Color(0xff90cea1),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (context) => AppInternetBloc()..add(AppStarted()),
+        ),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeData>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: state,
+            home: MultiBlocProvider(
+              providers: [
+                BlocProvider<MovieThisWeekCubit>(
+                  create: (context) =>
+                      MovieThisWeekCubit(repository: repository)
+                        ..mapMovieWeekToState(),
+                ),
+                BlocProvider<MoviesListCubit>(
+                  create: (context) =>
+                      MoviesListCubit(repository: repository)..loadMoviesList(),
+                ),
+                BlocProvider<MovieSearchBloc>(
+                  create: (context) => MovieSearchBloc(),
+                )
+              ],
+              child: HomeScreen(),
+            ),
+            onGenerateRoute: appRoutes.generateRoute,
+          );
+        },
       ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<MovieThisWeekCubit>(
-            create: (context) => MovieThisWeekCubit(repository: repository)
-              ..mapMovieWeekToState(),
-          ),
-          BlocProvider<MoviesListCubit>(
-            create: (context) =>
-                MoviesListCubit(repository: repository)..loadMoviesList(),
-          ),
-          BlocProvider<MovieSearchBloc>(
-            create: (context) => MovieSearchBloc(),
-          )
-        ],
-        child: HomeScreen(),
-      ),
-      onGenerateRoute: appRoutes.generateRoute,
     );
   }
 }

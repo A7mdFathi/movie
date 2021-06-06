@@ -6,3 +6,4 @@ export 'movie_details_cubit/movie_details_cubit.dart';
 export 'movie_search_bloc/bloc.dart';
 export 'movie_credits_cubit/movie_credits_cubit.dart';
 export 'person_details_cubit/person_details_cubit.dart';
+export 'app_theme_cubit/app_theme_cubit.dart';

@@ -3,14 +3,14 @@ import 'movie_item_widget.dart';
 
 class MoviesGrid extends StatelessWidget {
   final movies;
-  int fixedCount;
-  bool isImages;
-  MoviesGrid({@required this.movies,  this.fixedCount,this.isImages});
+  final int fixedCount;
+  final bool isImages;
+  MoviesGrid({@required this.movies, this.fixedCount, this.isImages});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 270.0,
+      height: 200.0,
       width: double.infinity,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,

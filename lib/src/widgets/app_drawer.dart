@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/blocs/app_theme_cubit/app_theme_cubit.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key key}) : super(key: key);
@@ -13,26 +15,37 @@ class AppDrawer extends StatelessWidget {
             width: double.infinity,
             height: 200.0,
             padding: EdgeInsets.only(top: 35.0, left: 20.0),
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(2, 20, 50, 1),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 45.0,
-                  child: FlutterLogo(
-                    size: 60.0,
-                  ),
-                  backgroundColor: Colors.white,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage('assets/launch_icon.png'),
+                          fit: BoxFit.fitWidth,
+                        )
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+                      icon: Icon(
+                        Icons.wb_sunny,
+                      ),
+                    )
+                  ],
                 ),
                 SizedBox(height: 15.0),
                 Text(
                   'Username',
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: Colors.white,
+                    color: Theme.of(context).highlightColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -40,7 +53,10 @@ class AppDrawer extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 5.0, left: 3.0),
                   child: Text(
                     'username@example.com',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Theme.of(context).hoverColor,
+
+                    ),
                   ),
                 ),
               ],
@@ -58,7 +74,6 @@ class AppDrawer extends StatelessWidget {
                   Text(
                     'Movies',
                     style: TextStyle(
-                        color: Colors.white,
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold),
                   ),
@@ -69,7 +84,6 @@ class AppDrawer extends StatelessWidget {
                       return Scaffold(
                         appBar: AppBar(
                           title: Text('TV Shows'),
-                          backgroundColor: Colors.teal,
                         ),
                         body: Container(
                           child: Center(
@@ -81,7 +95,6 @@ class AppDrawer extends StatelessWidget {
                     child: Text(
                       'TV Shows',
                       style: TextStyle(
-                          color: Colors.white,
                           fontSize: 25.0,
                           fontWeight: FontWeight.bold),
                     ),

@@ -7,20 +7,20 @@ import 'package:movies_now/src/api/api_urls.dart';
 class MovieThisWeekWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 3 + 70.0,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.40,
       child: GridTile(
         header: GridTileBar(
           leading: IconButton(
             onPressed: () => Scaffold.of(context).openDrawer(),
             icon: const Icon(Icons.menu),
-            color: Colors.white,
+            color: Theme.of(context).hoverColor,
           ),
-          title: Center(child: Text('Movie of This Week')),
+          title: Center(child: Text('Movie of This Week',style: TextStyle(fontWeight: FontWeight.bold,),)),
           trailing: IconButton(
             onPressed: () => Navigator.of(context).pushNamed('/search'),
             icon: const Icon(Icons.search),
-            color: Colors.white,
+            color: Theme.of(context).hoverColor,
           ),
         ),
         child: BlocBuilder<MovieThisWeekCubit, MovieThisWeekState>(
@@ -38,7 +38,8 @@ class MovieThisWeekWidget extends StatelessWidget {
                   'assets/movie_placeholder.jpg',
                   fit: BoxFit.cover,
                 ),
-                imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movie.backdrop_path,
+                imageUrl:
+                    BaseApiUrls.IMAGE_BASE_URL + state.movie.backdrop_path,
                 fit: BoxFit.cover,
               ),
             );
