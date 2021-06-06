@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/app_internet_bloc/app_internet_bloc.dart';
 import 'package:movies_now/src/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 import 'package:movies_now/src/screens/screens.dart';
@@ -30,16 +29,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
+    return
         BlocProvider(
           create: (context) => ThemeCubit(),
-        ),
-        BlocProvider(
-          lazy: false,
-          create: (context) => AppInternetBloc()..add(AppStarted()),
-        ),
-      ],
+
+
+
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, state) {
           return MaterialApp(
@@ -54,7 +49,7 @@ class App extends StatelessWidget {
                 ),
                 BlocProvider<MoviesListCubit>(
                   create: (context) =>
-                      MoviesListCubit(repository: repository)..loadMoviesList(),
+                      MoviesListCubit(repository: repository)..loadMoviesList(1),
                 ),
                 BlocProvider<MovieSearchBloc>(
                   create: (context) => MovieSearchBloc(),

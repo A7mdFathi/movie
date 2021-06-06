@@ -15,7 +15,7 @@ class MoviesSimilarCubit extends Cubit<MoviesSimilarState> {
 
   void loadMoviesList(int movieId) async {
     try {
-      _moviesList = (await repository.fetchTopRatedMovies()).movies;
+      _moviesList = (await repository.fetchTopRatedMovies(1)).movies;
 
       emit(
         MoviesSimilarSuccessState(

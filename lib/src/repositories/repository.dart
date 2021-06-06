@@ -21,11 +21,11 @@ class Repository {
   Future<MoviesResponse> searchMovies(String query) =>
       _movieHttpClient.searchMovies(query);
 
-  Future<MoviesResponse> fetchPopularMovies() =>
-      _movieHttpClient.fetchMoviesList('popular');
+  Future<MoviesResponse> fetchPopularMovies(int page) =>
+      _movieHttpClient.fetchMoviesList('popular',page);
 
-  Future<MoviesResponse> fetchTopRatedMovies() =>
-      _movieHttpClient.fetchMoviesList('top_rated');
+  Future<MoviesResponse> fetchTopRatedMovies(int page) =>
+      _movieHttpClient.fetchMoviesList('top_rated',page);
 
   Future<CreditModel> fetchMovieCredits(int movieId) =>
       _movieHttpClient.getMovieCredits(movieId);

@@ -17,7 +17,7 @@ class MovieThisWeekCubit extends Cubit<MovieThisWeekState> {
 
   void mapMovieWeekToState() async {
     try {
-      final response = await repository.fetchPopularMovies();
+      final response = await repository.fetchPopularMovies(1);
       _movie = response.movies.first;
       emit(MovieWeekLoaded(_movie));
     } catch (error) {

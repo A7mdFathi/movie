@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/blocs/movies_similar_cubit/movies_similar_cubit.dart';
+import 'package:movies_now/src/utils/app_colors.dart';
 import 'package:movies_now/src/widgets/movies_grid_widget.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
@@ -40,13 +41,13 @@ class MovieDetailsWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 35.0,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).hoverColor,
+                        color: AppColors.LIGHT_TEXT_COLOR,
                       ),
                     ),
                     Text(
                       state.movieModel.overview,
                       style: TextStyle(
-                        color: Theme.of(context).hoverColor,
+                        color: AppColors.LIGHT_TEXT_COLOR,
                       ),
                     ),
                   ],
@@ -59,7 +60,7 @@ class MovieDetailsWidget extends StatelessWidget {
               child: Text(
                 'Actors',
                 style: TextStyle(
-                  color: Theme.of(context).hoverColor,
+                  color: AppColors.LIGHT_TEXT_COLOR,
                 ),
               ),
             ),
@@ -82,7 +83,7 @@ class MovieDetailsWidget extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 15.0,
                               decoration: TextDecoration.underline,
-                              color: Theme.of(context).hoverColor,
+                              color: AppColors.LIGHT_TEXT_COLOR,
                             ),
                           ),
                         );
@@ -121,7 +122,7 @@ class MovieDetailsWidget extends StatelessWidget {
                 'Similar Movies',
                 style: TextStyle(
                   fontSize: 25.0,
-                  color: Theme.of(context).hoverColor,
+                  color: AppColors.LIGHT_TEXT_COLOR,
                 ),
               ),
             ),

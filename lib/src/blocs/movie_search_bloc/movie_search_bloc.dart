@@ -1,8 +1,11 @@
-import 'package:bloc/bloc.dart';
+
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 
-import 'bloc.dart';
-
+part  'movie_search_state.dart';
+part  'movie_search_event.dart';
 class MovieSearchBloc extends Bloc<MovieSearchEvents, MovieSearchStates> {
   final Repository _repository = Repository();
 

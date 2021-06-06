@@ -13,6 +13,7 @@ MoviesResponse _$MoviesResponseFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : MovieModel.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    json['total_pages'] as int,
   );
 }
 

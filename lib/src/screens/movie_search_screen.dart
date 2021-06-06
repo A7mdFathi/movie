@@ -27,7 +27,7 @@ class SearchPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   hintText: 'example : Avengers',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Theme.of(context).splashColor),
                   errorStyle: TextStyle(color: Colors.red),
                 ),
               ),

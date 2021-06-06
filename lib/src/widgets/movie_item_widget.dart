@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:movies_now/src/api/api_urls.dart';
 import 'package:movies_now/src/models/models.dart';
+import 'package:movies_now/src/utils/app_colors.dart';
 
 class MovieItem extends StatelessWidget {
   final MovieModel movie;
@@ -18,7 +19,7 @@ class MovieItem extends StatelessWidget {
           arguments: movie.id,
         ),
         child: Column(
-mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
@@ -50,6 +51,9 @@ mainAxisAlignment: MainAxisAlignment.center,
           backgroundColor: Colors.black45,
           title: Text(
             movie.title,
+            style: TextStyle(
+              color: Theme.of(context).splashColor,
+            ),
           ),
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,6 +62,7 @@ mainAxisAlignment: MainAxisAlignment.center,
               Text('${movie.vote_average}'),
               const Icon(
                 Icons.star_border,
+                color: AppColors.TERTIARY_COLOR,
               ),
             ],
           ),

@@ -25,11 +25,11 @@ class MovieHttpClient {
   }
 
   Future<MoviesResponse> fetchMoviesList(
-       String movieType) async {
+       String movieType,int page) async {
     final moviesListString =
         BaseApiUrls.MOVIES_LIST.replaceFirst('{movies_list}', movieType);
 
-    final Uri moviesUrl = Uri.parse(moviesListString);
+    final Uri moviesUrl = Uri.parse(moviesListString+'$page');
 
     //another url
     //  Uri testmov= Uri.https('api.themoviedb.org', '/3/$mediaType/$movieType',{'api_key':ApiUrls.API_KEY,},);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/api/api_urls.dart';
+import 'package:movies_now/src/utils/app_colors.dart';
 
 class MovieThisWeekWidget extends StatelessWidget {
   @override
@@ -14,13 +15,13 @@ class MovieThisWeekWidget extends StatelessWidget {
           leading: IconButton(
             onPressed: () => Scaffold.of(context).openDrawer(),
             icon: const Icon(Icons.menu),
-            color: Theme.of(context).hoverColor,
+            color: Theme.of(context).splashColor,
           ),
           title: Center(child: Text('Movie of This Week',style: TextStyle(fontWeight: FontWeight.bold,),)),
           trailing: IconButton(
             onPressed: () => Navigator.of(context).pushNamed('/search'),
             icon: const Icon(Icons.search),
-            color: Theme.of(context).hoverColor,
+            color: Theme.of(context).splashColor,
           ),
         ),
         child: BlocBuilder<MovieThisWeekCubit, MovieThisWeekState>(
@@ -53,6 +54,9 @@ class MovieThisWeekWidget extends StatelessWidget {
             if (state is MovieWeekLoaded) {
               return Text(
                 state.movie.title,
+                style: TextStyle(
+                  color: Theme.of(context).splashColor,
+                ),
               );
             }
             return Text('');
@@ -62,6 +66,9 @@ class MovieThisWeekWidget extends StatelessWidget {
             if (state is MovieWeekLoaded) {
               return Text(
                 state.movie.release_date,
+                style: TextStyle(
+                  color: Theme.of(context).splashColor,
+                ),
               );
             }
             return Text('');
@@ -75,6 +82,9 @@ class MovieThisWeekWidget extends StatelessWidget {
                   if (state is MovieWeekLoaded) {
                     return Text(
                       '${state.movie.vote_average}',
+                      style: TextStyle(
+                        color: Theme.of(context).splashColor,
+                      ),
                     );
                   }
                   return Text('');
@@ -82,6 +92,7 @@ class MovieThisWeekWidget extends StatelessWidget {
               ),
               const Icon(
                 Icons.star_border,
+                color: AppColors.TERTIARY_COLOR,
               ),
             ],
           ),

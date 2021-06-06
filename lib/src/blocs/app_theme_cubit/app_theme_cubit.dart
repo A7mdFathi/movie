@@ -10,7 +10,7 @@ class ThemeCubit extends Cubit<ThemeData> {
     primaryColor: AppColors.PRIMARY_COLOR,
     accentColor: AppColors.ACCENT_COLOR,
     hoverColor: AppColors.LIGHT_TEXT_COLOR,
-    highlightColor: AppColors.LIGHT_TEXT_COLOR,
+    highlightColor: AppColors.DARK_TEXT_COLOR,
     brightness: Brightness.light,
     splashColor: AppColors.TERTIARY_COLOR,
   );
@@ -22,7 +22,7 @@ class ThemeCubit extends Cubit<ThemeData> {
     brightness: Brightness.dark,
     splashColor: AppColors.TERTIARY_COLOR,
     hoverColor: AppColors.DARK_TEXT_COLOR,
-    highlightColor: AppColors.DARK_TEXT_COLOR,
+    highlightColor: AppColors.LIGHT_TEXT_COLOR,
   );
   bool lightTheme = true;
 

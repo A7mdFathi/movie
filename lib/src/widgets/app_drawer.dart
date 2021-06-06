@@ -45,7 +45,6 @@ class AppDrawer extends StatelessWidget {
                   'Username',
                   style: TextStyle(
                     fontSize: 25.0,
-                    color: Theme.of(context).highlightColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -54,7 +53,6 @@ class AppDrawer extends StatelessWidget {
                   child: Text(
                     'username@example.com',
                     style: TextStyle(
-                      color: Theme.of(context).hoverColor,
 
                     ),
                   ),

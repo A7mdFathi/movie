@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
-import 'package:movies_now/src/models/models.dart';
+
+part of 'movie_search_bloc.dart';
 
 abstract class MovieSearchStates extends Equatable {
   MovieSearchStates() : super();

@@ -13,11 +13,11 @@ class MoviesListCubit extends Cubit<MoviesListState> {
 
   MoviesListCubit({@required this.repository}) : super(MoviesListInitial());
 
-  void loadMoviesList() async {
+  void loadMoviesList(int page) async {
     try {
       _popularMovies =
-          (await repository.fetchPopularMovies()).movies.sublist(1);
-      _topRatedMovies = (await repository.fetchTopRatedMovies()).movies;
+          (await repository.fetchPopularMovies(1)).movies.sublist(1);
+      _topRatedMovies = (await repository.fetchTopRatedMovies(1)).movies;
 
       emit(
         MoviesListLoadedState(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/app_internet_bloc/app_internet_bloc.dart';
 import 'package:movies_now/src/widgets/widgets.dart';
 import 'screens.dart';
 
@@ -38,32 +36,18 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: BlocListener<AppInternetBloc, AppInternetState>(
-        listener: (context, state) {
-          if (state is AppDisconnectedState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Your app is Offline',
-                ),
-              ),
-            );
-          }
-        },
-        child: TabBarView(
-          children: _tabPages,
-          controller: _tabController,
-        ),
+      body: TabBarView(
+        children: _tabPages,
+        controller: _tabController,
       ),
       bottomNavigationBar: Material(
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 2.0,
         type: MaterialType.card,
         child: TabBar(
           indicatorColor: Theme.of(context).splashColor,
           labelColor: Theme.of(context).splashColor,
-          unselectedLabelColor: Theme.of(context).hoverColor,
+          unselectedLabelColor: Theme.of(context).highlightColor,
           tabs: _appTaps(context),
           controller: _tabController,
         ),

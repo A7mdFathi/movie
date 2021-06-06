@@ -10,14 +10,15 @@ class MoviesResponse extends Equatable {
   int page;
   @JsonKey(name: 'results')
   List<MovieModel> movies;
+  int total_pages;
 
-  MoviesResponse(this.page, this.movies);
+  MoviesResponse(this.page, this.movies,this.total_pages);
 
   factory MoviesResponse.fromJson(Map<String, dynamic> json) =>
       _$MoviesResponseFromJson(json);
 
   @override
-  List<Object> get props => [movies];
+  List<Object> get props => [movies,page,total_pages];
 }
 
 @JsonSerializable(createToJson: false)

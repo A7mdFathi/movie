@@ -12,10 +12,12 @@ class MovieCastScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cast'),
-        foregroundColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
+
+        title: Text('Cast',
+          style: TextStyle(
+          ),
+        ),
+
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -33,7 +35,7 @@ class MovieCastScreen extends StatelessWidget {
                 children: [
                   Positioned(
                     right: 0,
-                    top: 40,
+                    top: 20,
                     width: 200.0,
                     child: Container(
                       child: Builder(builder: (context) {

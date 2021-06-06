@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
+import 'package:movies_now/src/utils/app_colors.dart';
 import 'package:movies_now/src/widgets/widgets.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -11,14 +12,24 @@ class OverviewPage extends StatelessWidget {
       backgroundColor: Theme.of(context).splashColor,
       onRefresh: () async {
         context.read<MovieThisWeekCubit>().mapMovieWeekToState();
-        context.read<MoviesListCubit>().loadMoviesList();
+        context.read<MoviesListCubit>().loadMoviesList(1);
       },
       child: ListView(
         scrollDirection: Axis.vertical,
         physics: const AlwaysScrollableScrollPhysics(),
         children: [
           MovieThisWeekWidget(),
-          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Popular Movies',style: TextStyle(color: AppColors.TERTIARY_COLOR),),
+                TextButton(onPressed: () => Navigator.of(context).pushNamed('/more-movies'), child: Text('more',style: TextStyle(color:
+                AppColors.TERTIARY_COLOR),))
+              ],
+            ),
+          ),
           Builder(
             builder: (context) {
               final state = context.watch<MoviesListCubit>().state;

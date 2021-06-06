@@ -4,6 +4,7 @@ import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/blocs/movies_peopleid_cubit/movies_by_personid_cubit.dart';
 import 'package:movies_now/src/blocs/movies_similar_cubit/movies_similar_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
+import 'package:movies_now/src/screens/more_popular_movies.dart';
 import 'package:movies_now/src/screens/movie_trailer_screen.dart';
 import 'package:movies_now/src/screens/screens.dart';
 
@@ -62,9 +63,19 @@ class AppRoutes {
                   ));
         }
         return _errorRoute();
+      case '/more-movies':
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<MovieInfinityListBloc>(
+                  create: (context) =>
+                      MovieInfinityListBloc(repository: _repository)
+                        ..add(FirstPageFetched()),
+                  child: MorePopularMovies(),
+                ));
+        return _errorRoute();
       case '/movie_trailer':
         if (args is String) {
-          return MaterialPageRoute(builder: (_) => MovieTrailerScreen(trailerKey: args));
+          return MaterialPageRoute(
+              builder: (_) => MovieTrailerScreen(trailerKey: args));
         }
         return _errorRoute();
       case '/search':
