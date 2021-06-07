@@ -20,7 +20,7 @@ class SearchList extends StatelessWidget {
                 subtitle: Row(
                   children: [
                     Text(
-                      '${state.movieModel[index].vote_average}',
+                      '${state.movieModel[index].voteAverage}',
                     ),
                     const Icon(Icons.star_border_outlined),
                   ],
@@ -35,7 +35,7 @@ class SearchList extends StatelessWidget {
                   '/details',
                   arguments: state.movieModel[index].id,
                 ),
-                leading: state.movieModel[index].poster_path == null
+                leading: state.movieModel[index].posterPath == null
                     ? SizedBox(
                         height: 200.0,
                         width: 100.0,
@@ -45,7 +45,7 @@ class SearchList extends StatelessWidget {
                         height: 200.0,
                         width: 100.0,
                         imageUrl: BaseApiUrls.IMAGE_BASE_URL +
-                            state.movieModel[index].poster_path,
+                            state.movieModel[index].posterPath,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (context, url, progress) =>
                             Center(

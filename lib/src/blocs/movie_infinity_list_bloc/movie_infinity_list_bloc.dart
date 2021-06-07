@@ -7,6 +7,7 @@ import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 
 part 'movie_infinity_list_event.dart';
+
 part 'movie_infinity_list_state.dart';
 
 class MovieInfinityListBloc
@@ -15,13 +16,14 @@ class MovieInfinityListBloc
       : super(MovieInfinityListInitial());
 
   final Repository repository;
-
+  String _moviesType;
   int _shownPage = 1;
 
   @override
   Stream<MovieInfinityListState> mapEventToState(
       MovieInfinityListEvent event) async* {
     if (event is FirstPageFetched) {
+      _moviesType = event.moviesType;
       yield await _mapFirstToState();
     } else if (event is NextPageFetched) {
       yield await _mapNextPageToState(event);
@@ -33,30 +35,31 @@ class MovieInfinityListBloc
     if (currentState is MoviesLoadedState && currentState.hasReachMax) {
       return currentState;
     } else if (currentState is MoviesLoadedState && !currentState.hasReachMax) {
-      _shownPage += 1;
       try {
-        final response = await repository.fetchPopularMovies(_shownPage);
+        final response =
+            await repository.fetchMoreMovies(_moviesType, _shownPage);
 
         final nextMovies = response.movies;
-
+        _shownPage += 1;
         return MoviesLoadedState(
             movies: currentState.movies + nextMovies,
-            hasReachMax: response.total_pages == _shownPage);
+            hasReachMax: response.totalPages == _shownPage);
       } catch (_) {
         throw Exception;
       }
-    }else{
+    } else {
       return currentState;
     }
   }
 
   Future<MovieInfinityListState> _mapFirstToState() async {
     try {
-      final response = await repository.fetchPopularMovies(_shownPage);
+      final response =
+          await repository.fetchMoreMovies(_moviesType, _shownPage);
       final movies = response.movies;
       _shownPage += 1;
       return MoviesLoadedState(
-          movies: movies, hasReachMax: response.total_pages == _shownPage);
+          movies: movies, hasReachMax: response.totalPages == _shownPage);
     } catch (_) {
       throw Exception;
     }

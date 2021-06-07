@@ -8,12 +8,13 @@ part 'person_details_state.dart';
 
 class PersonDetailsCubit extends Cubit<PersonDetailsState> {
   final Repository repository;
-  PersonDetailsCubit({@required this.repository}) : super(PersonDetailsInitial());
+
+  PersonDetailsCubit({@required this.repository})
+      : super(PersonDetailsInitial());
 
   void mapPersonDetailsToState(int castId) async {
     try {
-      final PersonModel castDetails =
-          await repository.fetchCastDetails(castId);
+      final PersonModel castDetails = await repository.fetchCastDetails(castId);
 
       emit(PersonDetailsSuccessState(castDetails: castDetails));
     } catch (error) {

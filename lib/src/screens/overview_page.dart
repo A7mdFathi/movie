@@ -24,9 +24,17 @@ class OverviewPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Popular Movies',style: TextStyle(color: AppColors.TERTIARY_COLOR),),
-                TextButton(onPressed: () => Navigator.of(context).pushNamed('/more-movies'), child: Text('more',style: TextStyle(color:
-                AppColors.TERTIARY_COLOR),))
+                Text(
+                  'Popular Movies',
+                  style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                ),
+                TextButton(
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed('/more-movies', arguments: 'popular'),
+                    child: Text(
+                      'more',
+                      style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                    ))
               ],
             ),
           ),
@@ -39,7 +47,25 @@ class OverviewPage extends StatelessWidget {
               return SizedBox(height: 270.0);
             },
           ),
-          Divider(color: Theme.of(context).accentColor),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Top Rated Movies',
+                  style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                ),
+                TextButton(
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed('/more-movies', arguments: 'top_rated'),
+                    child: Text(
+                      'more',
+                      style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                    ))
+              ],
+            ),
+          ),
           Builder(builder: (context) {
             final state = context.watch<MoviesListCubit>().state;
             if (state is MoviesListLoadedState) {

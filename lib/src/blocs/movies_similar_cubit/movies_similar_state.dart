@@ -9,12 +9,11 @@ class MoviesSimilarInitial extends MoviesSimilarState {
   List<Object> get props => [];
 }
 
-class MoviesSimilarSuccessState extends MoviesSimilarState{
+class MoviesSimilarSuccessState extends MoviesSimilarState {
   final List<MovieModel> moviesList;
 
   MoviesSimilarSuccessState({@required this.moviesList});
 
   @override
   List<Object> get props => [moviesList];
-
 }

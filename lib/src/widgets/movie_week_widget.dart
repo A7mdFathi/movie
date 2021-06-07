@@ -17,7 +17,13 @@ class MovieThisWeekWidget extends StatelessWidget {
             icon: const Icon(Icons.menu),
             color: Theme.of(context).splashColor,
           ),
-          title: Center(child: Text('Movie of This Week',style: TextStyle(fontWeight: FontWeight.bold,),)),
+          title: Center(
+              child: Text(
+            'Movie of This Week',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          )),
           trailing: IconButton(
             onPressed: () => Navigator.of(context).pushNamed('/search'),
             icon: const Icon(Icons.search),
@@ -39,8 +45,7 @@ class MovieThisWeekWidget extends StatelessWidget {
                   'assets/movie_placeholder.jpg',
                   fit: BoxFit.cover,
                 ),
-                imageUrl:
-                    BaseApiUrls.IMAGE_BASE_URL + state.movie.backdrop_path,
+                imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movie.backdropPath,
                 fit: BoxFit.cover,
               ),
             );
@@ -65,7 +70,7 @@ class MovieThisWeekWidget extends StatelessWidget {
             final state = context.watch<MovieThisWeekCubit>().state;
             if (state is MovieWeekLoaded) {
               return Text(
-                state.movie.release_date,
+                state.movie.releaseDate,
                 style: TextStyle(
                   color: Theme.of(context).splashColor,
                 ),
@@ -81,7 +86,7 @@ class MovieThisWeekWidget extends StatelessWidget {
                   final state = context.watch<MovieThisWeekCubit>().state;
                   if (state is MovieWeekLoaded) {
                     return Text(
-                      '${state.movie.vote_average}',
+                      '${state.movie.voteAverage}',
                       style: TextStyle(
                         color: Theme.of(context).splashColor,
                       ),

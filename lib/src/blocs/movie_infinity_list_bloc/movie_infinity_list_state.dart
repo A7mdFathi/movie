@@ -21,4 +21,3 @@ class MoviesLoadedState extends MovieInfinityListState {
   @override
   List<Object> get props => [movies, hasReachMax];
 }
-

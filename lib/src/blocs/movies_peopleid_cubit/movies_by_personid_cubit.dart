@@ -8,6 +8,7 @@ part 'movies_by_personid_state.dart';
 
 class MoviesByPersonIdCubit extends Cubit<MoviesByPersonIdState> {
   final Repository _repository = Repository();
+
   MoviesByPersonIdCubit() : super(MoviesByPersonIdInitial());
 
   void mapMoviesByPersonToState(int personId) async {

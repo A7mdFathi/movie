@@ -12,12 +12,10 @@ class MovieCastScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        title: Text('Cast',
-          style: TextStyle(
-          ),
+        title: Text(
+          'Cast',
+          style: TextStyle(),
         ),
-
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -29,7 +27,6 @@ class MovieCastScreen extends StatelessWidget {
               margin: EdgeInsets.all(8.0),
               shadowColor: Theme.of(context).accentColor,
               elevation: 7.0,
-
               child: Stack(
                 alignment: Alignment.centerLeft,
                 children: [
@@ -65,7 +62,8 @@ class MovieCastScreen extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 70.0,
                             foregroundImage: CachedNetworkImageProvider(
-                              BaseApiUrls.IMAGE_BASE_URL + state.castDetails.profile_path,
+                              BaseApiUrls.IMAGE_BASE_URL +
+                                  state.castDetails.profile_path,
                             ),
                           ),
                         );

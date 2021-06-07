@@ -9,7 +9,7 @@ class MoviesByPersonIdInitial extends MoviesByPersonIdState {
   List<Object> get props => [];
 }
 
-class MoviesByPersonSuccessState extends MoviesByPersonIdState{
+class MoviesByPersonSuccessState extends MoviesByPersonIdState {
   final MoviesByPersonId moviesByPerson;
 
   MoviesByPersonSuccessState({@required this.moviesByPerson});

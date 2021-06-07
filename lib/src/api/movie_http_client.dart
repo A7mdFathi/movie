@@ -24,12 +24,11 @@ class MovieHttpClient {
     );
   }
 
-  Future<MoviesResponse> fetchMoviesList(
-       String movieType,int page) async {
+  Future<MoviesResponse> fetchMoviesList(String movieType, int page) async {
     final moviesListString =
         BaseApiUrls.MOVIES_LIST.replaceFirst('{movies_list}', movieType);
 
-    final Uri moviesUrl = Uri.parse(moviesListString+'$page');
+    final Uri moviesUrl = Uri.parse(moviesListString + '$page');
 
     //another url
     //  Uri testmov= Uri.https('api.themoviedb.org', '/3/$mediaType/$movieType',{'api_key':ApiUrls.API_KEY,},);
@@ -113,9 +112,9 @@ class MovieHttpClient {
     return MoviesByPersonId.fromJson(body);
   }
 
-  Future<MoviesResponse> getSimilarMovies(int movieId)async{
+  Future<MoviesResponse> getSimilarMovies(int movieId) async {
     final similarityListString =
-    BaseApiUrls.MOVIES_SIMILAR.replaceFirst('{movie_id}', '$movieId');
+        BaseApiUrls.MOVIES_SIMILAR.replaceFirst('{movie_id}', '$movieId');
 
     final Uri moviesUrl = Uri.parse(similarityListString);
 

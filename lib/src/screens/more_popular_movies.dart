@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_now/src/api/api_urls.dart';
 import 'package:movies_now/src/blocs/blocs.dart';
-import 'package:movies_now/src/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/widgets/movie_item_widget.dart';
 
 class MorePopularMovies extends StatefulWidget {
   @override
@@ -28,6 +28,10 @@ class _MorePopularMoviesState extends State<MorePopularMovies> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('More Movies'),
+          centerTitle: true,
+        ),
         body: BlocBuilder<MovieInfinityListBloc, MovieInfinityListState>(
           builder: (context, state) {
             if (state is MoviesLoadedState) {
@@ -37,33 +41,13 @@ class _MorePopularMoviesState extends State<MorePopularMovies> {
                   itemCount: state.movies.length,
                   controller: _scrollController,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 3,
                     childAspectRatio: 0.80,
-                    crossAxisSpacing: 3.0,
-                    mainAxisSpacing: 3.0,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
                   ),
                   itemBuilder: (context, index) {
-                    return GridTile(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: movies[index].poster_path == null
-                            ? Image.asset(
-                                'assets/movie_placeholder.jpg',
-                                fit: BoxFit.cover,
-                              )
-                            : CachedNetworkImage(
-                                fadeOutCurve: Curves.easeOut,
-                                placeholder: (context, url) => Image.asset(
-                                  'assets/movie_placeholder.jpg',
-                                  fit: BoxFit.cover,
-                                ),
-                                fadeInCurve: Curves.easeIn,
-                                imageUrl: BaseApiUrls.IMAGE_BASE_URL +
-                                    movies[index].poster_path,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                    );
+                    return MovieItem(movie: movies[index]);
                   });
             }
             return Container();

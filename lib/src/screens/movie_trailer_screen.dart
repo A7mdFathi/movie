@@ -15,8 +15,8 @@ class MovieTrailerScreen extends StatefulWidget {
 class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
   YoutubePlayerController _controller;
   String videoId;
-   PlayerState _playerState;
-   YoutubeMetaData _videoMetaData;
+  PlayerState _playerState;
+  YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = false;
 
   @override
@@ -25,20 +25,17 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
     videoId = YoutubePlayer.convertUrlToId(
         "https://www.youtube.com/watch?v=${widget.trailerKey}");
     _controller = YoutubePlayerController(
-
       initialVideoId: videoId,
-
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
-
       ),
     )..addListener(listener);
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
     _controller.toggleFullScreenMode();
-
   }
+
   void listener() {
     if (_isPlayerReady && mounted && _controller.value.isFullScreen) {
       setState(() {
@@ -47,22 +44,26 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
       });
     }
   }
+
   @override
   void deactivate() {
     // Pauses video while navigating to next page.
     _controller.pause();
     super.deactivate();
   }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: YoutubePlayerBuilder(
-        onExitFullScreen: () => SystemChrome.setPreferredOrientations(DeviceOrientation.values),
+          onExitFullScreen: () =>
+              SystemChrome.setPreferredOrientations(DeviceOrientation.values),
           player: YoutubePlayer(
             controller: _controller,
             showVideoProgressIndicator: true,
@@ -85,13 +86,12 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
                   color: Colors.white,
                   size: 25.0,
                 ),
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             ],
-               onReady: () {
-      _isPlayerReady = true;
-      },
+            onReady: () {
+              _isPlayerReady = true;
+            },
             onEnded: (metaData) => Navigator.of(context).pop(),
           ),
           builder: (context, player) {

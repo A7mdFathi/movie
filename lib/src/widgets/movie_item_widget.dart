@@ -18,28 +18,23 @@ class MovieItem extends StatelessWidget {
           '/details',
           arguments: movie.id,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: movie.poster_path == null
-                  ? Image.asset(
-                      'assets/movie_placeholder.jpg',
-                      fit: BoxFit.cover,
-                    )
-                  : CachedNetworkImage(
-                      fadeOutCurve: Curves.easeOut,
-                      placeholder: (context, url) => Image.asset(
-                        'assets/movie_placeholder.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                      fadeInCurve: Curves.easeIn,
-                      imageUrl: BaseApiUrls.IMAGE_BASE_URL + movie.poster_path,
-                      fit: BoxFit.cover,
-                    ),
-            ),
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: movie.posterPath == null
+              ? Image.asset(
+                  'assets/movie_placeholder.jpg',
+                  fit: BoxFit.cover,
+                )
+              : CachedNetworkImage(
+                  fadeOutCurve: Curves.easeOut,
+                  placeholder: (context, url) => Image.asset(
+                    'assets/movie_placeholder.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                  fadeInCurve: Curves.easeIn,
+                  imageUrl: BaseApiUrls.IMAGE_BASE_URL + movie.posterPath,
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
       footer: ClipRRect(
@@ -59,7 +54,7 @@ class MovieItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text('${movie.vote_average}'),
+              Text('${movie.voteAverage}'),
               const Icon(
                 Icons.star_border,
                 color: AppColors.TERTIARY_COLOR,

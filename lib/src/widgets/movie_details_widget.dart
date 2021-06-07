@@ -22,7 +22,7 @@ class MovieDetailsWidget extends StatelessWidget {
                 final state = context.watch<MovieDetailsCubit>().state;
                 if (state is MovieDetailSuccessState) {
                   return Text(
-                    '${state.movieModel.vote_count} Recommended',
+                    '${state.movieModel.voteCount} Recommended',
                     style: TextStyle(
                         color: Theme.of(context).accentColor, fontSize: 20.0),
                   );
@@ -97,7 +97,7 @@ class MovieDetailsWidget extends StatelessWidget {
               builder: (context) {
                 final state = context.watch<MovieDetailsCubit>().state;
                 if (state is MovieDetailSuccessState) {
-                  final movieGenres = state.movieModel.movieGenre;
+                  final movieGenres = state.movieModel.movieGenres;
                   return Row(
                     mainAxisSize: MainAxisSize.min,
                     children: movieGenres.map((movieGenre) {

@@ -5,6 +5,7 @@ class MoviesGrid extends StatelessWidget {
   final movies;
   final int fixedCount;
   final bool isImages;
+
   MoviesGrid({@required this.movies, this.fixedCount, this.isImages});
 
   @override

@@ -10,22 +10,21 @@ class MovieDetailsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Builder(
-        builder: (context) {
-          final state = context.watch<MovieDetailsCubit>().state;
-          if (state is MovieDetailSuccessState &&
-              state.movieModel.poster_path != null) {
-            return CachedNetworkImage(
-              width: double.infinity,
-              height: double.infinity,
-              fadeInCurve: Curves.bounceIn,
-              imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movieModel.poster_path,
-              fit: BoxFit.cover,
-            );
-          }
-          return Container();
-        },
-      );
-
+    return Builder(
+      builder: (context) {
+        final state = context.watch<MovieDetailsCubit>().state;
+        if (state is MovieDetailSuccessState &&
+            state.movieModel.posterPath != null) {
+          return CachedNetworkImage(
+            width: double.infinity,
+            height: double.infinity,
+            fadeInCurve: Curves.bounceIn,
+            imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movieModel.posterPath,
+            fit: BoxFit.cover,
+          );
+        }
+        return Container();
+      },
+    );
   }
 }

@@ -1,4 +1,3 @@
-
 part of 'movie_search_bloc.dart';
 
 abstract class MovieSearchStates extends Equatable {

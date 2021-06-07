@@ -29,12 +29,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        BlocProvider(
-          create: (context) => ThemeCubit(),
-
-
-
+    return BlocProvider(
+      lazy: false,
+      create: (context) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, state) {
           return MaterialApp(
@@ -48,8 +45,8 @@ class App extends StatelessWidget {
                         ..mapMovieWeekToState(),
                 ),
                 BlocProvider<MoviesListCubit>(
-                  create: (context) =>
-                      MoviesListCubit(repository: repository)..loadMoviesList(1),
+                  create: (context) => MoviesListCubit(repository: repository)
+                    ..loadMoviesList(1),
                 ),
                 BlocProvider<MovieSearchBloc>(
                   create: (context) => MovieSearchBloc(),

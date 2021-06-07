@@ -64,13 +64,15 @@ class AppRoutes {
         }
         return _errorRoute();
       case '/more-movies':
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider<MovieInfinityListBloc>(
-                  create: (context) =>
-                      MovieInfinityListBloc(repository: _repository)
-                        ..add(FirstPageFetched()),
-                  child: MorePopularMovies(),
-                ));
+        if (args is String) {
+          return MaterialPageRoute(
+              builder: (_) => BlocProvider<MovieInfinityListBloc>(
+                    create: (context) =>
+                        MovieInfinityListBloc(repository: _repository)
+                          ..add(FirstPageFetched(args)),
+                    child: MorePopularMovies(),
+                  ));
+        }
         return _errorRoute();
       case '/movie_trailer':
         if (args is String) {

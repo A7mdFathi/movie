@@ -9,12 +9,11 @@ class PersonDetailsInitial extends PersonDetailsState {
   List<Object> get props => [];
 }
 
-class PersonDetailsSuccessState extends PersonDetailsState{
+class PersonDetailsSuccessState extends PersonDetailsState {
   final PersonModel castDetails;
 
   PersonDetailsSuccessState({@required this.castDetails});
 
   @override
   List<Object> get props => [castDetails];
-
 }

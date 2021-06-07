@@ -25,12 +25,11 @@ class AppDrawer extends StatelessWidget {
                       height: 100.0,
                       width: 100.0,
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('assets/launch_icon.png'),
-                          fit: BoxFit.fitWidth,
-                        )
-                      ),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/launch_icon.png'),
+                            fit: BoxFit.fitWidth,
+                          )),
                     ),
                     IconButton(
                       onPressed: () => context.read<ThemeCubit>().toggleTheme(),
@@ -52,9 +51,7 @@ class AppDrawer extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 5.0, left: 3.0),
                   child: Text(
                     'username@example.com',
-                    style: TextStyle(
-
-                    ),
+                    style: TextStyle(),
                   ),
                 ),
               ],
@@ -71,9 +68,8 @@ class AppDrawer extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Movies',
-                    style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 15.0),
                   GestureDetector(
@@ -93,8 +89,7 @@ class AppDrawer extends StatelessWidget {
                     child: Text(
                       'TV Shows',
                       style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 25.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
