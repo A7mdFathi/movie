@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
+import 'package:movies_now/src/api/api_urls.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieTrailerScreen extends StatefulWidget {
@@ -22,17 +21,20 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
   @override
   void initState() {
     super.initState();
+    final url=ApiPaths.VIDEO_BASE_URL.replaceFirst('{key}', widget.trailerKey);
     videoId = YoutubePlayer.convertUrlToId(
-        "https://www.youtube.com/watch?v=${widget.trailerKey}");
+        url);
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
+
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
       ),
-    )..addListener(listener);
+    )..addListener(listener)..load(videoId);
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
+
     _controller.toggleFullScreenMode();
   }
 
@@ -45,12 +47,6 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
     }
   }
 
-  @override
-  void deactivate() {
-    // Pauses video while navigating to next page.
-    _controller.pause();
-    super.deactivate();
-  }
 
   @override
   void dispose() {
@@ -62,8 +58,7 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: YoutubePlayerBuilder(
-          onExitFullScreen: () =>
-              SystemChrome.setPreferredOrientations(DeviceOrientation.values),
+          onExitFullScreen: () => Navigator.of(context).pop(),
           player: YoutubePlayer(
             controller: _controller,
             showVideoProgressIndicator: true,

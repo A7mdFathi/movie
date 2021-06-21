@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_now/src/api/api_response.dart';
+import 'package:movies_now/src/api/app_exceptions.dart';
 
 import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
@@ -9,19 +11,17 @@ part 'movie_week_state.dart';
 
 class MovieThisWeekCubit extends Cubit<MovieThisWeekState> {
   final Repository repository;
-  MovieModel _movie;
 
   MovieThisWeekCubit({@required this.repository})
       : assert(repository != null),
         super(MovieWeekInitialState());
 
   void mapMovieWeekToState() async {
-    try {
-      final response = await repository.fetchPopularMovies(1);
-      _movie = response.movies.first;
-      emit(MovieWeekLoaded(_movie));
-    } catch (error) {
-      throw Exception(error);
+    final apiResponse = await repository.fetchMoviesList('popular', 1);
+    if (apiResponse.status != Status.COMPLETED) {
+      emit(MovieWeekErrorState(appException: apiResponse.appException));
     }
+    final data = MoviesResponse.fromJson(apiResponse.data);
+    emit(MovieWeekLoaded(data.movies.first));
   }
 }

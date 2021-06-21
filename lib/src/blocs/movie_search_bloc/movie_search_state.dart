@@ -30,3 +30,15 @@ class MovieSearchNotFoundState extends MovieSearchStates {
   @override
   List<Object> get props => [];
 }
+
+class MoviesSearchErrorState extends MovieSearchStates{
+  final AppException appException;
+
+  MoviesSearchErrorState(this.appException);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [appException];
+
+
+}

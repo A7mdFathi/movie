@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,7 @@ import 'package:movies_now/src/api/api_urls.dart';
 class SearchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieSearchBloc, MovieSearchStates>(
+    return BlocConsumer(
       builder: (context, state) {
         if (state is MovieSearchFoundState) {
           return ListView.builder(
@@ -44,7 +45,7 @@ class SearchList extends StatelessWidget {
                     : CachedNetworkImage(
                         height: 200.0,
                         width: 100.0,
-                        imageUrl: BaseApiUrls.IMAGE_BASE_URL +
+                        imageUrl: ApiPaths.IMAGE_BASE_URL +
                             state.movieModel[index].posterPath,
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (context, url, progress) =>
@@ -57,6 +58,13 @@ class SearchList extends StatelessWidget {
           );
         }
         return Container();
+      },
+      listener: (context, state) {
+        if (state is MoviesSearchErrorState) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('${state.appException}')));
+        }
       },
     );
   }

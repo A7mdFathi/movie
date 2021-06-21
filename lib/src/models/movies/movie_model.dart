@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movies_now/src/api/base_response.dart';
 import 'package:movies_now/src/models/genre/movie_genre.dart';
 import 'package:movies_now/src/models/models.dart';
 
@@ -56,9 +57,6 @@ class MovieModel extends Equatable {
       this.trailers,
       this.movieGenres);
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) =>
-      _$MovieModelFromJson(json);
-
   @override
   List<Object> get props => [
         id,
@@ -68,4 +66,8 @@ class MovieModel extends Equatable {
         posterPath,
         backdropPath,
       ];
+
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieModelFromJson(json);
 }

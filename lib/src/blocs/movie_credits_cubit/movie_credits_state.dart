@@ -21,3 +21,12 @@ class MovieCreditsLoadedState extends MovieCreditsState {
   @override
   List<Object> get props => [movieCast, movieCrew];
 }
+class MovieCreditsErrorState extends MovieCreditsState{
+  final AppException appException;
+
+  MovieCreditsErrorState({@required this.appException});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [appException];
+}

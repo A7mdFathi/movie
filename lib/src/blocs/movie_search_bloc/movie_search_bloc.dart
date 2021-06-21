@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/api/api_base_helper.dart';
+import 'package:movies_now/src/api/api_response.dart';
+import 'package:movies_now/src/api/app_exceptions.dart';
 import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 
@@ -8,10 +11,10 @@ part 'movie_search_state.dart';
 part 'movie_search_event.dart';
 
 class MovieSearchBloc extends Bloc<MovieSearchEvents, MovieSearchStates> {
-  final Repository _repository = Repository();
-
   MovieSearchBloc() : super(InitialMovieSearchState());
 
+  MoviesResponse _moviesResponse;
+  final Repository _repository = Repository(ApiBaseHelper());
   @override
   Stream<MovieSearchStates> mapEventToState(MovieSearchEvents event) async* {
     yield* _mapSearchFetchedToState(event);
@@ -21,12 +24,13 @@ class MovieSearchBloc extends Bloc<MovieSearchEvents, MovieSearchStates> {
       MovieSearchEvents event) async* {
     if (event is MovieSearchFetched) {
       yield MovieSearchLoadingState();
-      try {
-        final movies = (await _repository.searchMovies(event.searchTxt)).movies;
-        yield MovieSearchFoundState(movieModel: movies);
-      } catch (error) {
-        throw Exception(error);
+
+      final apiResponse = await _repository.searchMovies(event.searchTxt);
+      if (apiResponse.status != Status.COMPLETED) {
+        yield MoviesSearchErrorState(apiResponse.appException);
       }
+      _moviesResponse=MoviesResponse.fromJson(apiResponse.data);
+      yield MovieSearchFoundState(movieModel: _moviesResponse.movies);
     }
   }
 }
