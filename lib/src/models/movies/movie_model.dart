@@ -7,7 +7,7 @@ import 'package:movies_now/src/models/models.dart';
 part 'movie_model.g.dart';
 
 @JsonSerializable(createToJson: false)
-class MovieModel extends BaseResponse {
+class MovieModel extends Equatable {
   @JsonKey(name: 'vote_count')
   int voteCount;
   @JsonKey(name: 'id')
@@ -67,8 +67,6 @@ class MovieModel extends BaseResponse {
         backdropPath,
       ];
 
-  @override
-  fromJson(Map<String, dynamic> json) => MovieModel.fromJson(json);
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);

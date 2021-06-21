@@ -10,21 +10,27 @@ part 'movies_list_state.dart';
 
 class MoviesListCubit extends Cubit<MoviesListState> {
   final Repository repository;
-
+  MoviesResponse popularData;
+  MoviesResponse topRatedData;
   MoviesListCubit({@required this.repository}) : super(MoviesListInitial());
 
   void loadMoviesList(int page) async {
-    final _popularMovies = await repository.fetchMoviesList('popular', 1);
-    final _topRatedMovies = await repository.fetchMoviesList('top_rated', 1);
-    if (_popularMovies.status != Status.COMPLETED) {
-      emit(MoviesListErrorState(appException: _popularMovies.appException));
-    } else if (_topRatedMovies.status != Status.COMPLETED) {
-      emit(MoviesListErrorState(appException: _topRatedMovies.appException));
+    final _popularApiResponse =
+        await repository.fetchMoviesList('popular', 1);
+    final _topRatedApiResponse =
+        await repository.fetchMoviesList('top_rated', 1);
+    if (_popularApiResponse.status != Status.COMPLETED ||
+        _topRatedApiResponse.status != Status.COMPLETED) {
+      emit(MoviesListErrorState(
+          appException: _popularApiResponse.appException));
     }
+    popularData = MoviesResponse.fromJson(_popularApiResponse.data);
+    topRatedData = MoviesResponse.fromJson(_topRatedApiResponse.data);
+
     emit(
       MoviesListLoadedState(
-        popularMovies: _popularMovies.data.movies,
-        topRatedMovies: _topRatedMovies.data.movies,
+        popularMovies: popularData.movies,
+        topRatedMovies: topRatedData.movies,
       ),
     );
   }

@@ -11,17 +11,17 @@ part 'movies_by_personid_state.dart';
 
 class MoviesByPersonIdCubit extends Cubit<MoviesByPersonIdState> {
   final Repository _repository = Repository(ApiBaseHelper());
-
+  MoviesByPersonId _moviesByPersonId;
   MoviesByPersonIdCubit() : super(MoviesByPersonIdInitial());
 
   void mapMoviesByPersonToState(int personId) async {
+    final apiResponse = await _repository.getMoviesByPersonId(personId);
+    if (apiResponse.status != Status.COMPLETED) {
+      emit(MoviesByPersonErrorState(apiResponse.appException));
+      //todo should i put return; here
+    }
+    _moviesByPersonId = MoviesByPersonId.fromJson(apiResponse.data);
 
-      final  moviesByPersonId =
-          await _repository.getMoviesByPersonId(personId);
-      if(moviesByPersonId.status !=Status.COMPLETED){
-        emit(MoviesByPersonErrorState(moviesByPersonId.appException));
-      }
-      emit(MoviesByPersonSuccessState(moviesByPerson: moviesByPersonId.data));
-
+    emit(MoviesByPersonSuccessState(moviesByPerson: _moviesByPersonId));
   }
 }

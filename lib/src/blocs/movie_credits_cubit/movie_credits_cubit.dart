@@ -10,7 +10,7 @@ part 'movie_credits_state.dart';
 
 class MovieCreditsCubit extends Cubit<MovieCreditsState> {
   Repository repository;
-
+CreditModel _creditModel;
   MovieCreditsCubit({@required this.repository}) : super(MovieCreditsInitial());
 
   void mapMovieCreditsToState(int movieId) async {
@@ -18,10 +18,10 @@ class MovieCreditsCubit extends Cubit<MovieCreditsState> {
     if (movieCredits.status != Status.COMPLETED) {
       emit(MovieCreditsErrorState(appException: movieCredits.appException));
     }
-
+_creditModel=CreditModel.fromJson(movieCredits.data);
     emit(MovieCreditsLoadedState(
-      movieCast: movieCredits.data.cast,
-      movieCrew: movieCredits.data.crew,
+      movieCast: _creditModel.cast,
+      movieCrew: _creditModel.crew,
     ));
   }
 }

@@ -21,6 +21,7 @@ class ApiBaseHelper {
     switch (response.statusCode) {
       case 200:
         final jsonData = json.decode(response.body);
+        //todo use method T fromJson here
         final apiResponse = ApiResponse<T>.completed(jsonData);
         // print(jsonData);
         return apiResponse;

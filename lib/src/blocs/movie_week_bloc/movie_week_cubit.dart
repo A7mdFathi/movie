@@ -17,10 +17,11 @@ class MovieThisWeekCubit extends Cubit<MovieThisWeekState> {
         super(MovieWeekInitialState());
 
   void mapMovieWeekToState() async {
-    final response = await repository.fetchMoviesList('popular', 1);
-    if (response.status != Status.COMPLETED) {
-      emit(MovieWeekErrorState(appException: response.appException));
+    final apiResponse = await repository.fetchMoviesList('popular', 1);
+    if (apiResponse.status != Status.COMPLETED) {
+      emit(MovieWeekErrorState(appException: apiResponse.appException));
     }
-    emit(MovieWeekLoaded(response.data.movies.first));
+    final data = MoviesResponse.fromJson(apiResponse.data);
+    emit(MovieWeekLoaded(data.movies.first));
   }
 }

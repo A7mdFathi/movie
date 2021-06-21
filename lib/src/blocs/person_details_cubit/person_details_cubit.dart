@@ -15,10 +15,11 @@ class PersonDetailsCubit extends Cubit<PersonDetailsState> {
       : super(PersonDetailsInitial());
 
   void mapPersonDetailsToState(int castId) async {
-    final castDetails = await repository.getCastDetails(castId);
-    if (castDetails.status != Status.COMPLETED) {
-      emit(PersonDetailsErrorState(castDetails.appException));
+    final apiResponse = await repository.getCastDetails(castId);
+    if (apiResponse.status != Status.COMPLETED) {
+      emit(PersonDetailsErrorState(apiResponse.appException));
     }
-    emit(PersonDetailsSuccessState(castDetails: castDetails.data));
+    final actorDetails=PersonModel.fromJson(apiResponse.data);
+    emit(PersonDetailsSuccessState(castDetails: actorDetails));
   }
 }

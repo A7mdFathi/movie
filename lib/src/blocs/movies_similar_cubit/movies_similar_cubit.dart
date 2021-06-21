@@ -15,13 +15,15 @@ class MoviesSimilarCubit extends Cubit<MoviesSimilarState> {
   final Repository repository;
 
   void loadMoviesList(int movieId) async {
-    final _moviesList = await repository.getSimilarMovies(1);
-    if (_moviesList.status != Status.COMPLETED) {
-      emit(MoviesSimilarErrorState(_moviesList.appException));
+    final apiResponse = await repository.getSimilarMovies(movieId);
+    if (apiResponse.status != Status.COMPLETED) {
+      emit(MoviesSimilarErrorState(apiResponse.appException));
     }
+
+    final _movies = MoviesResponse.fromJson(apiResponse.data);
     emit(
       MoviesSimilarSuccessState(
-        moviesList: _moviesList.data.movies,
+        moviesList: _movies.movies,
       ),
     );
   }

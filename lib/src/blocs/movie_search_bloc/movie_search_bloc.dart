@@ -11,10 +11,10 @@ part 'movie_search_state.dart';
 part 'movie_search_event.dart';
 
 class MovieSearchBloc extends Bloc<MovieSearchEvents, MovieSearchStates> {
-  final Repository _repository = Repository(ApiBaseHelper());
-
   MovieSearchBloc() : super(InitialMovieSearchState());
 
+  MoviesResponse _moviesResponse;
+  final Repository _repository = Repository(ApiBaseHelper());
   @override
   Stream<MovieSearchStates> mapEventToState(MovieSearchEvents event) async* {
     yield* _mapSearchFetchedToState(event);
@@ -25,11 +25,12 @@ class MovieSearchBloc extends Bloc<MovieSearchEvents, MovieSearchStates> {
     if (event is MovieSearchFetched) {
       yield MovieSearchLoadingState();
 
-      final response = await _repository.searchMovies(event.searchTxt);
-      if (response.status != Status.COMPLETED) {
-        yield MoviesSearchErrorState(response.appException);
+      final apiResponse = await _repository.searchMovies(event.searchTxt);
+      if (apiResponse.status != Status.COMPLETED) {
+        yield MoviesSearchErrorState(apiResponse.appException);
       }
-      yield MovieSearchFoundState(movieModel: response.data.movies);
+      _moviesResponse=MoviesResponse.fromJson(apiResponse.data);
+      yield MovieSearchFoundState(movieModel: _moviesResponse.movies);
     }
   }
 }

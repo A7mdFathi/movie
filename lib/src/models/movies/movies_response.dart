@@ -8,19 +8,17 @@ import '../models.dart';
 part 'movies_response.g.dart';
 
 @JsonSerializable(createToJson: false)
-class MoviesResponse extends BaseResponse {
-  int page;
+class MoviesResponse extends Equatable {
+  final int page;
   @JsonKey(name: 'results')
-  List<MovieModel> movies;
+  final List<MovieModel> movies;
   @JsonKey(name: 'total_pages')
-  int totalPages;
+  final int totalPages;
 
   MoviesResponse(this.page, this.movies, this.totalPages);
 
-
+  factory MoviesResponse.fromJson(Map<String, dynamic> json) =>
+      _$MoviesResponseFromJson(json);
   @override
   List<Object> get props => [page, movies, totalPages];
-
-  @override
-  fromJson(Map<String, dynamic> json) =>_$MoviesResponseFromJson(json);
 }

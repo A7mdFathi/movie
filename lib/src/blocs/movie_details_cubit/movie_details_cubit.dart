@@ -10,7 +10,7 @@ part 'movie_details_state.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final Repository repository;
-
+  MovieModel _movieModel;
   MovieDetailsCubit({@required this.repository})
       : assert(repository != null),
         super(MovieDetailsInitialState());
@@ -20,6 +20,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
     if (_detailMovie.status != Status.COMPLETED) {
       emit(MovieDetailsErrorState(appException: _detailMovie.appException));
     }
-    emit(MovieDetailSuccessState(_detailMovie.data));
+    _movieModel = MovieModel.fromJson(_detailMovie.data);
+    emit(MovieDetailSuccessState(_movieModel));
   }
 }

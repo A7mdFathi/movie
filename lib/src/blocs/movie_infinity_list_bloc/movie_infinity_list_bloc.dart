@@ -20,7 +20,7 @@ class MovieInfinityListBloc
   final Repository repository;
   String _moviesType;
   int _shownPage = 1;
-
+  MoviesResponse _moviesResponse;
   @override
   Stream<MovieInfinityListState> mapEventToState(
       MovieInfinityListEvent event) async* {
@@ -44,7 +44,8 @@ class MovieInfinityListBloc
       if (response.status != Status.COMPLETED) {
         yield MoviesLoadErrorState(response.appException);
       }
-      final nextMovies = response.data.movies;
+      _moviesResponse = MoviesResponse.fromJson(response.data);
+      final nextMovies = _moviesResponse.movies;
       _shownPage += 1;
       yield MoviesLoadedState(
           movies: currentState.movies + nextMovies,
@@ -55,13 +56,15 @@ class MovieInfinityListBloc
   }
 
   Stream<MovieInfinityListState> _mapFirstToState() async* {
-    final response = await repository.fetchMoviesList(_moviesType, _shownPage);
-    if (response.status != Status.COMPLETED) {
-      yield MoviesLoadErrorState(response.appException);
+    final apiResponse = await repository.fetchMoviesList(_moviesType, _shownPage);
+    if (apiResponse.status != Status.COMPLETED) {
+      yield MoviesLoadErrorState(apiResponse.appException);
     }
-    final movies = response.data.movies;
+    _moviesResponse = MoviesResponse.fromJson(apiResponse.data);
+
+    final movies = _moviesResponse.movies;
     _shownPage += 1;
     yield MoviesLoadedState(
-        movies: movies, hasReachMax: response.data.totalPages == _shownPage);
+        movies: movies, hasReachMax: apiResponse.data.totalPages == _shownPage);
   }
 }
