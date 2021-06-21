@@ -17,3 +17,12 @@ class MoviesSimilarSuccessState extends MoviesSimilarState {
   @override
   List<Object> get props => [moviesList];
 }
+class MoviesSimilarErrorState extends MoviesSimilarState{
+  final AppException appException;
+
+  MoviesSimilarErrorState(this.appException);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [appException];
+}

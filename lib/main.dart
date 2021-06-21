@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/api/api_base_helper.dart';
 import 'package:movies_now/src/blocs/app_theme_cubit/app_theme_cubit.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 import 'package:movies_now/src/screens/screens.dart';
@@ -8,8 +9,8 @@ import 'src/blocs/blocs.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  final Repository repository = Repository();
-  // Bloc.observer = SimpleBlocObserver();
+  final Repository repository = Repository(ApiBaseHelper());
+  Bloc.observer = SimpleBlocObserver();
   runApp(
     App(
       appRoutes: AppRoutes(repository: repository),

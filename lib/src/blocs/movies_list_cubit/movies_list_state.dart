@@ -24,3 +24,12 @@ class MoviesListLoadedState extends MoviesListState {
         topRatedMovies,
       ];
 }
+class MoviesListErrorState extends MoviesListState{
+
+  final AppException appException;
+
+  MoviesListErrorState({@required this.appException});
+
+  @override
+  List<Object> get props => [appException];
+}

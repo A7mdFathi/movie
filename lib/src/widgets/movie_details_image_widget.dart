@@ -19,7 +19,7 @@ class MovieDetailsImageWidget extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             fadeInCurve: Curves.bounceIn,
-            imageUrl: BaseApiUrls.IMAGE_BASE_URL + state.movieModel.posterPath,
+            imageUrl: ApiPaths.IMAGE_BASE_URL + state.movieModel.posterPath,
             fit: BoxFit.cover,
           );
         }

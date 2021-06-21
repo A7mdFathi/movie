@@ -1,46 +1,65 @@
 import 'package:http/http.dart' show Client;
-import 'package:movies_now/src/api/movie_http_client.dart';
+import 'package:movies_now/src/api/api_base_helper.dart';
+import 'package:movies_now/src/api/api_response.dart';
+import 'package:movies_now/src/api/api_urls.dart';
+import 'package:movies_now/src/repositories/movie_repository.dart';
 import 'package:movies_now/src/models/credits/credit_model.dart';
 import 'package:movies_now/src/models/models.dart';
 
 class Repository {
-  final Client client = Client();
-  MovieHttpClient _movieHttpClient;
-  static final Repository _repository = Repository._internal();
+  ApiBaseHelper apiBaseHelper;
 
-  factory Repository() {
-    return _repository;
+  Repository(this.apiBaseHelper);
+
+  Future<ApiResponse<MoviesResponse>> fetchMoviesList(
+      String movieType, int page) async {
+    final moviesPath = ApiPaths.MOVIES_LIST
+        .replaceFirst('{movies_list}', movieType)
+        .replaceFirst('{page}', '$page');
+    return await apiBaseHelper.getData<MoviesResponse>(Uri.parse(moviesPath));
   }
 
-  Repository._internal() {
-    _movieHttpClient = MovieHttpClient(client: client);
+  Future<ApiResponse<MovieModel>> fetchMovieDetails(int movieId) async {
+    final moviePath = ApiPaths.MOVIE.replaceFirst('{movie_id}', '$movieId');
+
+    return await apiBaseHelper.getData<MovieModel>(Uri.parse(moviePath));
   }
 
-  Future<MovieModel> getMovie(int id) => _movieHttpClient.fetchMovieDetails(id);
+  Future<ApiResponse<MoviesResponse>> searchMovies(String query) async {
+    final searchMoviesPath =
+        ApiPaths.SEARCH_MOVIE.replaceFirst('{query}', query);
 
-  Future<MoviesResponse> searchMovies(String query) =>
-      _movieHttpClient.searchMovies(query);
+    return apiBaseHelper.getData<MoviesResponse>(Uri.parse(searchMoviesPath));
+  }
 
-  Future<MoviesResponse> fetchMoreMovies(String movies, int page) =>
-      _movieHttpClient.fetchMoviesList(movies, page);
+  Future<ApiResponse<CreditModel>> getMovieCredits(int movieId) async {
+    final actorsMoviePath =
+        ApiPaths.MOVIE_CREDITS.replaceFirst('{movie_id}', '$movieId');
 
-  Future<MoviesResponse> fetchPopularMovies(int page) =>
-      _movieHttpClient.fetchMoviesList('popular', page);
+    return await apiBaseHelper.getData<CreditModel>(Uri.parse(actorsMoviePath));
+  }
 
-  Future<MoviesResponse> fetchTopRatedMovies(int page) =>
-      _movieHttpClient.fetchMoviesList('top_rated', page);
+  Future<ApiResponse<PersonModel>> getCastDetails(int castId) async {
+    final String actorDetailsPath =
+        ApiPaths.CAST_DETAILS.replaceFirst('{cast_id}', '$castId');
 
-  Future<CreditModel> fetchMovieCredits(int movieId) =>
-      _movieHttpClient.getMovieCredits(movieId);
+    return await apiBaseHelper.getData<PersonModel>(Uri.parse(actorDetailsPath));
+  }
 
-  Future<PersonModel> fetchCastDetails(int castId) =>
-      _movieHttpClient.getCastDetails(castId);
+  Future<ApiResponse<MoviesByPersonId>> getMoviesByPersonId(
+      int personId) async {
+    final moviesByActorPath =
+        ApiPaths.MOVIES_BY_PERSON_ID.replaceFirst('{person_id}', '$personId');
 
-  Future<MoviesByPersonId> fetchMoviesByPerson(int personId) =>
-      _movieHttpClient.getMoviesByPersonId(personId);
+    return await apiBaseHelper.getData<MoviesByPersonId>(Uri.parse(moviesByActorPath));
+  }
 
-  Future<MoviesResponse> fetchSimilarMovies(int movieId) =>
-      _movieHttpClient.getSimilarMovies(movieId);
+  Future<ApiResponse<MoviesResponse>> getSimilarMovies(int movieId) async {
+    final similarMoviesPath =
+        ApiPaths.MOVIES_SIMILAR.replaceFirst('{movie_id}', '$movieId');
+
+    return await apiBaseHelper.getData<MoviesResponse>(Uri.parse(similarMoviesPath));
+  }
 
 //  Future<MoviesModel> fetchNowPlaying() =>
 //      _moviesApiProvider.fetchMovies('movie', 'now_playing', true);

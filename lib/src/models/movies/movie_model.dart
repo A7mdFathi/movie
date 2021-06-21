@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movies_now/src/api/base_response.dart';
 import 'package:movies_now/src/models/genre/movie_genre.dart';
 import 'package:movies_now/src/models/models.dart';
 
 part 'movie_model.g.dart';
 
 @JsonSerializable(createToJson: false)
-class MovieModel extends Equatable {
+class MovieModel extends BaseResponse {
   @JsonKey(name: 'vote_count')
   int voteCount;
   @JsonKey(name: 'id')
@@ -56,9 +57,6 @@ class MovieModel extends Equatable {
       this.trailers,
       this.movieGenres);
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) =>
-      _$MovieModelFromJson(json);
-
   @override
   List<Object> get props => [
         id,
@@ -68,4 +66,10 @@ class MovieModel extends Equatable {
         posterPath,
         backdropPath,
       ];
+
+  @override
+  fromJson(Map<String, dynamic> json) => MovieModel.fromJson(json);
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieModelFromJson(json);
 }

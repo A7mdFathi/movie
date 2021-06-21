@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_now/src/api/api_response.dart';
+import 'package:movies_now/src/api/app_exceptions.dart';
 import 'package:movies_now/src/models/models.dart';
 import 'package:movies_now/src/repositories/repositories.dart';
 
@@ -13,12 +15,10 @@ class PersonDetailsCubit extends Cubit<PersonDetailsState> {
       : super(PersonDetailsInitial());
 
   void mapPersonDetailsToState(int castId) async {
-    try {
-      final PersonModel castDetails = await repository.fetchCastDetails(castId);
-
-      emit(PersonDetailsSuccessState(castDetails: castDetails));
-    } catch (error) {
-      throw Exception(error);
+    final castDetails = await repository.getCastDetails(castId);
+    if (castDetails.status != Status.COMPLETED) {
+      emit(PersonDetailsErrorState(castDetails.appException));
     }
+    emit(PersonDetailsSuccessState(castDetails: castDetails.data));
   }
 }

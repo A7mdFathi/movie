@@ -14,66 +14,77 @@ class OverviewPage extends StatelessWidget {
         context.read<MovieThisWeekCubit>().mapMovieWeekToState();
         context.read<MoviesListCubit>().loadMoviesList(1);
       },
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: [
-          MovieThisWeekWidget(),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Popular Movies',
-                  style: TextStyle(color: AppColors.TERTIARY_COLOR),
-                ),
-                TextButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed('/more-movies', arguments: 'popular'),
-                    child: Text(
-                      'more',
-                      style: TextStyle(color: AppColors.TERTIARY_COLOR),
-                    ))
-              ],
+      child: BlocListener<MoviesListCubit, MoviesListState>(
+        listener: (context, state) {
+          if (state is MoviesListErrorState) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text('${state.appException}')),
+              );
+          }
+        },
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            MovieThisWeekWidget(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Popular Movies',
+                    style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                  ),
+                  TextButton(
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed('/more-movies', arguments: 'popular'),
+                      child: Text(
+                        'more',
+                        style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                      ))
+                ],
+              ),
             ),
-          ),
-          Builder(
-            builder: (context) {
+            Builder(
+              builder: (context) {
+                final state = context.watch<MoviesListCubit>().state;
+                if (state is MoviesListLoadedState) {
+                  return MoviesGrid(movies: state.popularMovies);
+                }
+                return SizedBox(height: 270.0);
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Top Rated Movies',
+                    style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                  ),
+                  TextButton(
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed('/more-movies', arguments: 'top_rated'),
+                      child: Text(
+                        'more',
+                        style: TextStyle(color: AppColors.TERTIARY_COLOR),
+                      ))
+                ],
+              ),
+            ),
+            Builder(builder: (context) {
               final state = context.watch<MoviesListCubit>().state;
               if (state is MoviesListLoadedState) {
-                return MoviesGrid(movies: state.popularMovies);
+                return MoviesGrid(movies: state.topRatedMovies);
               }
               return SizedBox(height: 270.0);
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Top Rated Movies',
-                  style: TextStyle(color: AppColors.TERTIARY_COLOR),
-                ),
-                TextButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed('/more-movies', arguments: 'top_rated'),
-                    child: Text(
-                      'more',
-                      style: TextStyle(color: AppColors.TERTIARY_COLOR),
-                    ))
-              ],
-            ),
-          ),
-          Builder(builder: (context) {
-            final state = context.watch<MoviesListCubit>().state;
-            if (state is MoviesListLoadedState) {
-              return MoviesGrid(movies: state.topRatedMovies);
-            }
-            return SizedBox(height: 270.0);
-          })
-        ],
+            })
+          ],
+        ),
       ),
     );
   }

@@ -21,3 +21,13 @@ class MoviesLoadedState extends MovieInfinityListState {
   @override
   List<Object> get props => [movies, hasReachMax];
 }
+
+class MoviesLoadErrorState extends MovieInfinityListState{
+  final AppException appException;
+
+  MoviesLoadErrorState(this.appException);
+
+  @override
+  List<Object> get props => [appException];
+
+}

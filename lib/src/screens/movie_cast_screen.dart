@@ -62,7 +62,7 @@ class MovieCastScreen extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 70.0,
                             foregroundImage: CachedNetworkImageProvider(
-                              BaseApiUrls.IMAGE_BASE_URL +
+                              ApiPaths.IMAGE_BASE_URL +
                                   state.castDetails.profile_path,
                             ),
                           ),
