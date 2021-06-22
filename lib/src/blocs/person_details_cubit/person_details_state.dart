@@ -17,7 +17,8 @@ class PersonDetailsSuccessState extends PersonDetailsState {
   @override
   List<Object> get props => [castDetails];
 }
-class PersonDetailsErrorState extends PersonDetailsState{
+
+class PersonDetailsErrorState extends PersonDetailsState {
   final AppException appException;
 
   PersonDetailsErrorState(this.appException);

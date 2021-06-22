@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movies_now/src/api/base_response.dart';
 import 'package:movies_now/src/models/genre/movie_genre.dart';
 import 'package:movies_now/src/models/models.dart';
 
 part 'movie_model.g.dart';
 
+@injectable
 @JsonSerializable(createToJson: false)
 class MovieModel extends Equatable {
   @JsonKey(name: 'vote_count')
@@ -67,7 +68,7 @@ class MovieModel extends Equatable {
         backdropPath,
       ];
 
-
+  @factoryMethod
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
 }

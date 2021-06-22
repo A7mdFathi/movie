@@ -18,7 +18,8 @@ class MoviesByPersonSuccessState extends MoviesByPersonIdState {
   // TODO: implement props
   List<Object> get props => [moviesByPerson];
 }
-class MoviesByPersonErrorState extends MoviesByPersonIdState{
+
+class MoviesByPersonErrorState extends MoviesByPersonIdState {
   final AppException appException;
 
   MoviesByPersonErrorState(this.appException);

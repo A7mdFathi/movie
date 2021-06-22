@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_now/src/widgets/widgets.dart';
+
 import 'screens.dart';
 
 class HomeScreen extends StatefulWidget {

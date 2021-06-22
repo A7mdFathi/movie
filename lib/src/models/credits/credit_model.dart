@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'credit_model.g.dart';
 
+@injectable
 @JsonSerializable(createToJson: false)
 class CreditModel extends Equatable {
   int id;
@@ -12,6 +14,7 @@ class CreditModel extends Equatable {
 
   CreditModel(this.id, this.cast);
 
+  @factoryMethod
   factory CreditModel.fromJson(Map<String, dynamic> json) =>
       _$CreditModelFromJson(json);
 
@@ -19,6 +22,7 @@ class CreditModel extends Equatable {
   List<Object> get props => [id, cast, crew];
 }
 
+@injectable
 @JsonSerializable(createToJson: false)
 class Crew {
   int id;
@@ -31,9 +35,11 @@ class Crew {
   Crew(this.id, this.name, this.profile_path, this.credits_id, this.job,
       this.department);
 
+  @factoryMethod
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
 }
 
+@injectable
 @JsonSerializable(createToJson: false)
 class Cast {
   int cast_id;
@@ -47,5 +53,6 @@ class Cast {
   Cast(this.cast_id, this.character, this.credit_id, this.id, this.name,
       this.order, this.profile_path);
 
+  @factoryMethod
   factory Cast.fromJson(Map<String, dynamic> json) => _$CastFromJson(json);
 }

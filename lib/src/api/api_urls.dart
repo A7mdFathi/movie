@@ -17,5 +17,5 @@ class ApiPaths {
       BASE_URL + 'person/{person_id}/movie_credits' + API_KEY;
   static const String CAST_DETAILS = BASE_URL + 'person/{cast_id}' + API_KEY;
   static const String MOVIES_SIMILAR =
-      BASE_URL + 'movie/{movie_id}/recommendations'+API_KEY;
+      BASE_URL + 'movie/{movie_id}/recommendations' + API_KEY;
 }

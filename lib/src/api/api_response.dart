@@ -1,5 +1,3 @@
-
-
 import 'package:movies_now/src/api/app_exceptions.dart';
 
 enum Status { LOADING, COMPLETED, ERROR }
@@ -11,7 +9,9 @@ class ApiResponse<T> {
   AppException appException;
 
   ApiResponse.loading(this.message) : status = Status.LOADING;
+
   ApiResponse.completed(this.data) : status = Status.COMPLETED;
+
   ApiResponse.error(this.appException) : status = Status.ERROR;
 
   @override
@@ -19,4 +19,3 @@ class ApiResponse<T> {
     return "Status : $status \n Message : $message \n Data : $data";
   }
 }
-

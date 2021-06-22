@@ -17,7 +17,8 @@ class MovieWeekLoaded extends MovieThisWeekState {
   @override
   List<Object> get props => [movie];
 }
-class MovieWeekErrorState extends MovieThisWeekState{
+
+class MovieWeekErrorState extends MovieThisWeekState {
   final AppException appException;
 
   MovieWeekErrorState({@required this.appException});
@@ -26,4 +27,3 @@ class MovieWeekErrorState extends MovieThisWeekState{
   // TODO: implement props
   List<Object> get props => [appException];
 }
-

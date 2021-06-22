@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_now/src/api/api_urls.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/widgets/movie_item_widget.dart';
 
 class MorePopularMovies extends StatefulWidget {
