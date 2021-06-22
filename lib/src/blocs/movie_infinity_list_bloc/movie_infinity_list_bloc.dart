@@ -49,14 +49,15 @@ class MovieInfinityListBloc
       _shownPage += 1;
       yield MoviesLoadedState(
           movies: currentState.movies + nextMovies,
-          hasReachMax: response.data.totalPages == _shownPage);
+          hasReachMax: _moviesResponse.totalPages == _shownPage);
     } else {
       yield currentState;
     }
   }
 
   Stream<MovieInfinityListState> _mapFirstToState() async* {
-    final apiResponse = await repository.fetchMoviesList(_moviesType, _shownPage);
+    final apiResponse =
+        await repository.fetchMoviesList(_moviesType, _shownPage);
     if (apiResponse.status != Status.COMPLETED) {
       yield MoviesLoadErrorState(apiResponse.appException);
     }
@@ -65,6 +66,8 @@ class MovieInfinityListBloc
     final movies = _moviesResponse.movies;
     _shownPage += 1;
     yield MoviesLoadedState(
-        movies: movies, hasReachMax: apiResponse.data.totalPages == _shownPage);
+      movies: movies,
+      hasReachMax: _moviesResponse.totalPages == _shownPage,
+    );
   }
 }

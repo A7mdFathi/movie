@@ -27,7 +27,7 @@ class MovieDetailsWidget extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.fromLTRB(8.0, 100.0, 8.0, 8.0),
             children: [
-              SizedBox(height: 150),
+              Spacer(),
               Builder(
                 builder: (context) {
                   final state = context.watch<MovieDetailsCubit>().state;
@@ -103,7 +103,7 @@ class MovieDetailsWidget extends StatelessWidget {
                   return Column();
                 },
               ),
-              SizedBox(height: 20.0),
+              Spacer(),
               Builder(
                 builder: (context) {
                   final state = context.watch<MovieDetailsCubit>().state;
@@ -148,7 +148,9 @@ class MovieDetailsWidget extends StatelessWidget {
                     return Container();
                   },
                 ),
-              )
+              ),
+              Spacer(),
+              SizedBox(height: 100.0)
             ],
           ),
         ),
