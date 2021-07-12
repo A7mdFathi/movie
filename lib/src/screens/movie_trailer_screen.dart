@@ -21,17 +21,18 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
   @override
   void initState() {
     super.initState();
-    final url=ApiPaths.VIDEO_BASE_URL.replaceFirst('{key}', widget.trailerKey);
-    videoId = YoutubePlayer.convertUrlToId(
-        url);
+    final url =
+        ApiPaths.VIDEO_BASE_URL.replaceFirst('{key}', widget.trailerKey);
+    videoId = YoutubePlayer.convertUrlToId(url);
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
-
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
       ),
-    )..addListener(listener)..load(videoId);
+    )
+      ..addListener(listener)
+      ..load(videoId);
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
 
@@ -46,7 +47,6 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
       });
     }
   }
-
 
   @override
   void dispose() {

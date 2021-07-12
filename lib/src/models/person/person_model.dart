@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'person_model.g.dart';
 
+@injectable
 @JsonSerializable(createToJson: false)
 class PersonModel extends Equatable {
   String biography;
@@ -27,6 +29,7 @@ class PersonModel extends Equatable {
   @override
   List<Object> get props => [id, name];
 
+  @factoryMethod
   factory PersonModel.fromJson(Map<String, dynamic> json) =>
       _$PersonModelFromJson(json);
 }

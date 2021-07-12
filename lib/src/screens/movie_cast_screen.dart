@@ -1,10 +1,10 @@
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_now/src/api/api_urls.dart';
 import 'package:movies_now/src/blocs/movies_peopleid_cubit/movies_by_personid_cubit.dart';
 import 'package:movies_now/src/blocs/person_details_cubit/person_details_cubit.dart';
-import 'package:movies_now/src/api/api_urls.dart';
 import 'package:movies_now/src/widgets/movies_grid_widget.dart';
 
 class MovieCastScreen extends StatelessWidget {

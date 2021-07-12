@@ -1,9 +1,9 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_now/src/blocs/blocs.dart';
 import 'package:movies_now/src/api/api_urls.dart';
+import 'package:movies_now/src/blocs/blocs.dart';
 
 class MovieDetailsImageWidget extends StatelessWidget {
   const MovieDetailsImageWidget({Key key}) : super(key: key);

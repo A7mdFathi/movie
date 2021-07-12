@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onChange(Cubit cubit, Change change) {

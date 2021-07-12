@@ -1,4 +1,5 @@
 class NoNextPageException implements Exception {}
+
 class AppException implements Exception {
   final _message;
   final _prefix;

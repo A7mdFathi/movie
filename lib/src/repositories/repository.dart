@@ -1,18 +1,14 @@
-import 'package:http/http.dart' show Client;
+import 'package:injectable/injectable.dart';
 import 'package:movies_now/src/api/api_base_helper.dart';
 import 'package:movies_now/src/api/api_response.dart';
 import 'package:movies_now/src/api/api_urls.dart';
-import 'package:movies_now/src/repositories/movie_repository.dart';
-import 'package:movies_now/src/models/credits/credit_model.dart';
-import 'package:movies_now/src/models/models.dart';
+import 'package:movies_now/src/dependencies/dependency_init.dart';
 
+@Singleton()
 class Repository {
-  ApiBaseHelper apiBaseHelper;
+  ApiBaseHelper apiBaseHelper = getIt<ApiBaseHelper>();
 
-  Repository(this.apiBaseHelper);
-
-  Future<ApiResponse> fetchMoviesList(
-      String movieType, int page) async {
+  Future<ApiResponse> fetchMoviesList(String movieType, int page) async {
     final moviesPath = ApiPaths.MOVIES_LIST
         .replaceFirst('{movies_list}', movieType)
         .replaceFirst('{page}', '$page');
@@ -43,25 +39,21 @@ class Repository {
     final String actorDetailsPath =
         ApiPaths.CAST_DETAILS.replaceFirst('{cast_id}', '$castId');
 
-    return await apiBaseHelper
-        .getData(Uri.parse(actorDetailsPath));
+    return await apiBaseHelper.getData(Uri.parse(actorDetailsPath));
   }
 
-  Future<ApiResponse> getMoviesByPersonId(
-      int personId) async {
+  Future<ApiResponse> getMoviesByPersonId(int personId) async {
     final moviesByActorPath =
         ApiPaths.MOVIES_BY_PERSON_ID.replaceFirst('{person_id}', '$personId');
 
-    return await apiBaseHelper
-        .getData(Uri.parse(moviesByActorPath));
+    return await apiBaseHelper.getData(Uri.parse(moviesByActorPath));
   }
 
   Future<ApiResponse> getSimilarMovies(int movieId) async {
     final similarMoviesPath =
         ApiPaths.MOVIES_SIMILAR.replaceFirst('{movie_id}', '$movieId');
 
-    return await apiBaseHelper
-        .getData(Uri.parse(similarMoviesPath));
+    return await apiBaseHelper.getData(Uri.parse(similarMoviesPath));
   }
 
 //  Future<MoviesModel> fetchNowPlaying() =>

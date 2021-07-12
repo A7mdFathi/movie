@@ -17,8 +17,8 @@ class MovieDetailSuccessState extends MovieDetailsState {
   @override
   List<Object> get props => [movieModel];
 }
-class MovieDetailsErrorState extends MovieDetailsState{
 
+class MovieDetailsErrorState extends MovieDetailsState {
   final AppException appException;
 
   MovieDetailsErrorState({@required this.appException});

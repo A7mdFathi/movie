@@ -24,8 +24,8 @@ class MoviesListLoadedState extends MoviesListState {
         topRatedMovies,
       ];
 }
-class MoviesListErrorState extends MoviesListState{
 
+class MoviesListErrorState extends MoviesListState {
   final AppException appException;
 
   MoviesListErrorState({@required this.appException});

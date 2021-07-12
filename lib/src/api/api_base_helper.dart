@@ -1,9 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 import 'package:movies_now/src/api/api_response.dart';
+
 import 'app_exceptions.dart';
 
+@Injectable()
 class ApiBaseHelper {
   Future<ApiResponse<T>> getData<T>(Uri url) async {
     var responseJson;
@@ -27,7 +31,8 @@ class ApiBaseHelper {
         return apiResponse;
       case 400:
         // throw BadRequestException(response.body.toString());
-        return ApiResponse<T>.error(BadRequestException(response.body.toString()));
+        return ApiResponse<T>.error(
+            BadRequestException(response.body.toString()));
       case 401:
       case 403:
         // throw UnauthorisedException(response.body.toString());
