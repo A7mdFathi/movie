@@ -10,7 +10,7 @@ import 'package:movies_now/src/utils/app_routes.dart';
 import 'src/blocs/blocs.dart';
 
 void main() {
-   configureDependencies();
+  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = getIt<SimpleBlocObserver>();
   runApp(
